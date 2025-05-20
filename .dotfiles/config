@@ -6,3 +6,12 @@
 	precomposeunicode = true
 [status]
 	showUntrackedFiles = no
+[remote "origin"]
+	url = git@github.com:bfcoursewool/dotfilesv2.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[submodule "/Users/robertkotz/.tmux"]
+	url = git@github.com:mamyn0va/tmux-dracula.git
+	active = true

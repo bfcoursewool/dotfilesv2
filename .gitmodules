@@ -1,0 +1,12 @@
+[submodule ".config/fzf/fzf-git.sh"]
+	path = .config/fzf/fzf-git.sh
+	url = git@github.com:junegunn/fzf-git.sh.git
+[submodule ".tmux"]
+	path = .tmux
+	url = git@github.com:mamyn0va/tmux-dracula.git
+[submodule "/Users/robertkotz/tmux/plugins/tpm"]
+	path = /Users/robertkotz/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "/Users/robertkotz/.tmux"]
+	path = /Users/robertkotz/.tmux
+	url = git@github.com:mamyn0va/tmux-dracula.git
