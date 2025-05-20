@@ -1,0 +1,232 @@
+tap "bufbuild/buf"
+tap "homebrew/services"
+tap "jesseduffield/lazygit"
+tap "kcl-lang/tap"
+tap "mongodb/brew"
+tap "nikitabobko/tap"
+tap "thezoraiz/ascii-image-converter"
+# Run your GitHub Actions locally
+brew "act"
+# Companion library to apr, the Apache Portable Runtime library
+brew "apr-util"
+# Automatic configure script builder
+brew "autoconf"
+# Tool for generating GNU Standards-compliant Makefiles
+brew "automake"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# GNU binary tools for native development
+brew "binutils"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
+# Versatile and fast Unicode/ASCII/ANSI graphics renderer
+brew "chafa"
+# General purpose syntax highlighter in pure Go
+brew "chroma"
+# Console Matrix
+brew "cmatrix"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# File comparison utilities
+brew "diffutils"
+# Tool for exploring each layer in a docker image
+brew "dive"
+# Classic UNIX line editor
+brew "ed"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Utility to determine file types
+brew "file-formula"
+# Collection of GNU find, xargs, and locate
+brew "findutils"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GNU awk utility
+brew "gawk"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Git extension for versioning large files
+brew "git-lfs"
+# C code prettifier
+brew "gnu-indent"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# GNU version of the tar archiving utility
+brew "gnu-tar"
+# GNU implementation of which utility
+brew "gnu-which"
+# Library for USB device access
+brew "libusb"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# GNU grep, egrep and fgrep
+brew "grep"
+# Like cURL, but for gRPC
+brew "grpcurl"
+# Popular GNU data compression program
+brew "gzip"
+# Kubernetes package manager
+brew "helm"
+# Improved top (interactive process viewer)
+brew "htop"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Generic library support script
+brew "libtool"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Tool that can switch between kubectl contexts easily and create aliases
+brew "kubectx"
+# Template-free customization of Kubernetes YAML manifests
+brew "kustomize"
+# DNS library written in C
+brew "ldns"
+# Provides library functionality for FIDO U2F & FIDO 2.0, including USB
+brew "libfido2"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Rainbows and unicorns in your console!
+brew "lolcat"
+# Package manager for the Lua programming language
+brew "luarocks"
+# Run a Kubernetes cluster locally
+brew "minikube"
+# Platform built on V8 to build network applications
+brew "node"
+# MongoDB Shell to connect, configure, query, and work with your MongoDB database
+brew "mongosh"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Platform built on V8 to build network applications
+brew "node@16"
+# Manage multiple Node.js versions
+brew "nvm"
+# Create, run, and share large language models (LLMs)
+brew "ollama"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# Highly capable, feature-rich programming language
+brew "perl"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# Fast, disk space efficient package manager
+brew "pnpm"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Protocol buffers (Google's data interchange format)
+brew "protobuf"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
+# Pure Python Vim clone
+brew "pyvim"
+# SVG rendering tool and library
+brew "resvg"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Utility that provides fast incremental file transfer
+brew "rsync"
+# Terminal multiplexer with VT100/ANSI terminal emulation
+brew "screen"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Version control system designed to be a better CVS
+brew "subversion"
+# Terminal user interface for taskwarrior
+brew "taskwarrior-tui"
+# Secrets management tool for developers
+brew "teller"
+# User interface to the TELNET protocol
+brew "telnet"
+# Terraform version manager inspired by rbenv
+brew "tfenv"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Development environment, testing framework and asset pipeline for Ethereum
+brew "truffle"
+# Extraction utility for .zip compressed archives
+brew "unzip"
+# Collection of Linux utilities
+brew "util-linux"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Display word differences between text files
+brew "wdiff"
+# Internet file retriever
+brew "wget"
+# JavaScript package manager
+brew "yarn"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# The best way of working with Protocol Buffers.
+brew "bufbuild/buf/buf"
+# A simple terminal UI for git commands, written in Go
+brew "jesseduffield/lazygit/lazygit"
+# KCL Command Line Interface
+brew "kcl-lang/tap/kcl"
+# High-performance, schema-free, document-oriented database
+brew "mongodb/brew/mongodb-community"
+# Convert images into ascii art
+brew "thezoraiz/ascii-image-converter/ascii-image-converter"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "aerospace"
+# Voice and text chat software
+cask "discord"
+# Collaborative team software
+cask "figma"
+cask "font-fira-code"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-symbols-only-nerd-font"
+# Free and open-source image editor
+cask "gimp"
+# Keyboard customiser
+cask "karabiner-elements"
+# Full TeX Live distribution without GUI applications
+cask "mactex-no-gui"
+# Online collaborative whiteboard platform
+cask "miro"
+# Graphical user interface for TeX Live Manager
+cask "tex-live-utility"
+# Configurator of compatible keyboards in real time
+cask "vial"
+# Multimedia player
+cask "vlc"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm"
