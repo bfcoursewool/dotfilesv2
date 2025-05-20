@@ -15,3 +15,6 @@
 [submodule "/Users/robertkotz/.tmux"]
 	url = git@github.com:mamyn0va/tmux-dracula.git
 	active = true
+[submodule ".tmux"]
+	active = true
+	url = git@github.com:mamyn0va/tmux-dracula.git
