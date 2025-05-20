@@ -1,0 +1,30 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """$cmd_duration
+$time
+$directory\
+$git_branch
+$character"""
+
+add_newline = false
+
+[character]
+success_symbol = '[\$](bold dimmed green)'
+
+[time]
+disabled = false
+format = "[$time]($style)"
+time_format = '%a %h %-e %-l:%M %p'
+use_12hr = true
+style = 'bold green'
+
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+before_repo_root_style = 'dimmed bold cyan'
+repo_root_style = 'bold cyan'
+
+[cmd_duration]
+format = "took [$duration]($style)\n"
+
