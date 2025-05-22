@@ -7,7 +7,8 @@ local get_visual = function(args, parent)
 end
 
 return {
-  s({trig="nint"},
+  -- New interface
+  s({trig="ni"},
     fmt(
       [[
       interface <> {
@@ -22,7 +23,8 @@ return {
     )
   ), 
 
-  s({trig="ncmp"},
+  -- New component
+  s({trig="nc"},
     fmt(
       [[
       const <> = ({ <> }: <>): <> =>> {
@@ -45,10 +47,11 @@ return {
     )
   ),
 
-  s({trig="nfn"},
+  -- New function, assigned to a const
+  s({trig="nf"},
     fmt(
       [[
-      const <> = (<>): <> =>> {
+      const <> = <> (<>): <> =>> {
         <>   
       }
     ]],
@@ -57,8 +60,28 @@ return {
         i(2),
         i(3),
         i(4),
+        i(5),
       },
       { delimiters = "<>" }
     )
   ),
+
+  -- New lambda / anonymous function
+  s({trig="nl"},
+    fmt(
+      [[
+      <> (<>): <> =>> {
+        <>   
+      }
+    ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+      },
+      { delimiters = "<>" }
+    )
+  ),
+
 }

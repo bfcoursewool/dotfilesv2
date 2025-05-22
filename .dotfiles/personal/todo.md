@@ -1,3 +1,7 @@
+jjimenez.6814@gmail.com
+
+
+
 https://www.decisionproblem.com/paperclips/index2.html
 
 https://www.youtube.com/shorts/-Myppv5cZUM
