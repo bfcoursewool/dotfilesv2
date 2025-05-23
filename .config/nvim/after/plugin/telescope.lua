@@ -32,7 +32,6 @@ function SearchDotfiles()
       "~/.aws",
       "~/.ssh",
       "~/.tmux",
-      "~/.wezterm.lua",
       "~/.tmux.conf.local",
       "~/.zshenv",
       "~/.profile",

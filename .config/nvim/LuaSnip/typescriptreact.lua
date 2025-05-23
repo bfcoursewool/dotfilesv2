@@ -1,3 +1,16 @@
+-- standard helpers -----------------------------------------------
+local ls  = require("luasnip")            -- the core module
+
+-- nodes
+local s   = ls.snippet                    -- "snippet"
+local sn  = ls.snippet_node
+local i   = ls.insert_node
+local d   = ls.dynamic_node
+
+-- extras ----------------------------------------------------------
+local fmt = require("luasnip.extras.fmt").fmt   -- format‑string helper
+local rep = require("luasnip.extras").rep       -- repeat() helper
+
 local get_visual = function(args, parent)
   if (#parent.snippet.env.LS_SELECT_RAW > 0) then
     return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
@@ -21,7 +34,7 @@ return {
       },
       { delimiters = "<>" }
     )
-  ), 
+  ),
 
   -- New component
   s({trig="nc"},

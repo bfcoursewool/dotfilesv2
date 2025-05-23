@@ -46,7 +46,9 @@ require('mason-lspconfig').setup({
     'html',
     'jsonls',
     'pylyzer',
-    'yamlls'
+    'yamlls',
+    'vimls',
+    'lua_ls',
   },
   handlers = {
     function(server_name)

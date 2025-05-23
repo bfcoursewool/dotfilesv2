@@ -8,12 +8,16 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 config.color_scheme = 'Argonaut'
-
-local act = wezterm.action
+-- …but override just the background value
+config.colors = {
+  -- any key that appears here replaces the same key in the scheme
+  background = '#000000',   -- pure black
+}
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12.0
 
+local act = wezterm.action
 config.keys = {
   -- Make CMD-Left equivalent to Alt-b which many line editors interpret as backward-word
   { key = 'LeftArrow', mods = 'CMD', action = act.SendString '\x1bb' },
@@ -25,11 +29,13 @@ config.keys = {
   { key = 'Backspace', mods = 'CMD', action = act.SendKey {key = 'w', mods = 'CTRL'} },
 } 
 
-config.debug_key_events = true
+--config.debug_key_events = true
 
+-- Hide the tab bar... I use tmux anyway so I don't need multiple wezterm tabs ever. 
 config.enable_tab_bar = false
-config.window_background_opacity = 0
 
+-- this keeps wezterm from beeping annoyingly or doing any weird visual flickering whenever 
+-- errors happen and stuff. I just prefer it silent and visually stable. 
 config.audible_bell = 'Disabled'
 config.visual_bell = {
   fade_in_duration_ms = 75,
