@@ -97,4 +97,35 @@ return {
     )
   ),
 
+  -- New useEffect
+  s({trig="nue"},
+    fmt(
+      [[
+      useEffect(() =>> {
+        <>
+      }, [<>])
+    ]],
+      {
+        i(1),
+        i(2),
+      },
+      { delimiters = "<>" }
+    )
+  ),
+
+  -- New useState
+  s({trig="nus"},
+    fmt(
+      [[
+      const [<>, <>] = useState<<<>>>(<>)
+    ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+      },
+      { delimiters = "<>" }
+    )
+  ),
 }

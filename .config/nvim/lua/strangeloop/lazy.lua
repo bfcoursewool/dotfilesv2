@@ -3,7 +3,7 @@
 -- just sit here until I figure it out, but also it is a nice little collection of demo 
 -- cmds that you can potentially use to get your sweet ASCII art header... Between 
 -- ASCII-image-converter, chafa, and lolcat, you can do some pretty fun stuff. 
-function fetch_random_header()
+local function fetch_random_header()
   local strings = {
     '~/.config/nvim/animate-rainbow-header.sh ~/.config/nvim/assets/ascii-wolfy-thrack.txt',
     '~/.config/nvim/animate-rainbow-header.sh ~/.config/nvim/assets/chafa-header.txt',
@@ -213,7 +213,7 @@ require('lazy').setup({
   },
 
   -- gnupg integration for when you need to do s00per s3kr37 stuff.
-  { 'jamessan/vim-gnupg' }, 
+  { 'jamessan/vim-gnupg' },
 
   -- A really versatile fuzzy finder that has lots of neat builtin functions
   {
@@ -254,7 +254,7 @@ require('lazy').setup({
         highlight_on_key = true,
 
         -- dim all other characters if set to true (recommended!)
-        dim = true,             
+        dim = true,            
 
         -- set the maximum number of characters eyeliner.nvim will check from
         -- your current cursor position; this is useful if you are dealing with
@@ -281,8 +281,8 @@ require('lazy').setup({
   -- text objects. There's a treesitter.lua file in the plugins "after" directory
   -- that has additional configs to be aware of. 
   'nvim-treesitter/nvim-treesitter-context',
-  { 
-  	'nvim-treesitter/nvim-treesitter', 
+  {
+  	'nvim-treesitter/nvim-treesitter',
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
@@ -459,7 +459,7 @@ require('lazy').setup({
       })
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-  }, 
+  },
 
   -- BBQ provides a VSCode-style "winbar" at the top of a window that shows
   -- context info pulled from the LSP. There are some remaps set up in remap.lua
@@ -543,11 +543,11 @@ require('lazy').setup({
       })
     end
   },
- 
+
   -- Markdown renderer... nice. 
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 
+    dependencies = {
       { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
       { 'nvim-treesitter' }
     },
@@ -555,7 +555,7 @@ require('lazy').setup({
       require('render-markdown').setup({})
     end,
   },
- 
+
   -- I'm pretty sure this is a dependency for one of these plugins, but I can't remember which now.
   -- {
   --   'vhyrro/luarocks.nvim', -- Luarocks manager for Neovim
@@ -575,14 +575,14 @@ require('lazy').setup({
   { 'olimorris/onedarkpro.nvim', lazy = true },
   { 'catppuccin/nvim', name = 'catppuccin', lazy = 'true' },
   { 'oxfist/night-owl.nvim', lazy = true },
-  { 'kvrohit/substrata.nvim', lazy = true}, 
+  { 'kvrohit/substrata.nvim', lazy = true},
   { 'Mofiqul/vscode.nvim', lazy = true },
-  { 
+  {
     'bluz71/vim-moonfly-colors',
     name = 'moonfly',
     priority = 1000,
-    config = function() 
-      vim.cmd.colorscheme('moonfly') 
+    config = function()
+      vim.cmd.colorscheme('moonfly')
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,

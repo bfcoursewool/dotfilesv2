@@ -348,7 +348,7 @@ bind-key -r A run-shell "~/.local/bin/tmux-sessionizer ~/Work/application-infras
 bind-key -r S run-shell "~/.local/bin/tmux-sessionizer ~/Work/aquifi-swap"
 bind-key -r D run-shell "~/.local/bin/tmux-sessionizer ~/Work/aquifi-admin-ui"
 bind-key -r M run-shell "~/.local/bin/tmux-sessionizer ~/Work/liquidity-altbc"
-bind-key -r T run-shell "~/.local/bin/tmux-sessionizer ~/Work/forte-rules-engine"
+bind-key -r T run-shell "~/.local/bin/tmux-sessionizer ~/Work/forte-rules-engine-v1"
 bind-key -r P run-shell "~/.local/bin/tmux-sessionizer ~/Work/platform-infrastructure"
 bind-key -r R run-shell "~/.local/bin/tmux-sessionizer ~"
 
