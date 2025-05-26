@@ -5,6 +5,8 @@ vim.g.mapleader = " "
 -- terminal window that remembers past state, as opposed to using tmux to make a new pane or something
 vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 
+vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>')
+
 -- Harpoon keybindings
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')

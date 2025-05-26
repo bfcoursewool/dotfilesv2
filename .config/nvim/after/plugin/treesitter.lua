@@ -1,13 +1,13 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { 
+  ensure_installed = {
     "c",
     "lua",
     "vim",
     "javascript",
     "typescript",
     "vimdoc",
-    "query", 
+    "query",
     "markdown",
     "markdown_inline",
     "solidity",
@@ -39,7 +39,7 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
 
   indent = { enable = true },
-  
+
   highlight = {
     enable = true,
 
@@ -50,6 +50,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+vim.treesitter.language.register('bash', 'zsh')
 
 require'treesitter-context'.setup {
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

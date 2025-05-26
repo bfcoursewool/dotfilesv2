@@ -186,3 +186,4 @@ source ~/.config/fzf/fzf-git.sh/fzf-git.sh
 
 # ----- Bat (better cat) -----
 export BAT_THEME=fly16
+

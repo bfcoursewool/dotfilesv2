@@ -14,7 +14,9 @@ config.colors = {
   background = '#000000',   -- pure black
 }
 
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+--config.font = wezterm.font("JetBrainsMono Nerd Font")
+--config.font = wezterm.font("CaskaydiaCove Nerd Font")
+config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 12.0
 
 local act = wezterm.action
