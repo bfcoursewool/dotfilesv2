@@ -117,6 +117,10 @@ brew "minikube"
 brew "node"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
+# NCurses Disk Usage
+brew "ncdu"
+# Fast, highly customisable system info script
+brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Platform built on V8 to build network applications
@@ -211,9 +215,16 @@ cask "aerospace"
 cask "discord"
 # Collaborative team software
 cask "figma"
+cask "font-caskaydia-cove-nerd-font"
+cask "font-caskaydia-mono-nerd-font"
 cask "font-fira-code"
+cask "font-fira-code-nerd-font"
+cask "font-hack-nerd-font"
+cask "font-iosevka-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
+cask "font-mononoki-nerd-font"
 cask "font-symbols-only-nerd-font"
+cask "font-victor-mono-nerd-font"
 # Free and open-source image editor
 cask "gimp"
 # Keyboard customiser
@@ -232,3 +243,5 @@ cask "vlc"
 cask "wezterm"
 # Docker desktop
 cask "docker"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-containers"
