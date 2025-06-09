@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 
 vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>')
+vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>')
 
 -- Harpoon keybindings
 local mark = require('harpoon.mark')
