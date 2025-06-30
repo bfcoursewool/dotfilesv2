@@ -1,9 +1,11 @@
 tap "bufbuild/buf"
 tap "homebrew/services"
 tap "jesseduffield/lazygit"
+tap "jstkdng/programs"
 tap "kcl-lang/tap"
 tap "mongodb/brew"
 tap "nikitabobko/tap"
+tap "streamingfast/tap"
 tap "thezoraiz/ascii-image-converter"
 # Run your GitHub Actions locally
 brew "act"
@@ -141,6 +143,8 @@ brew "pipx"
 brew "pnpm"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Object-relational database system
+brew "postgresql@14", restart_service: :changed
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Interpreted, interactive, object-oriented programming language
@@ -203,10 +207,13 @@ brew "zsh-syntax-highlighting"
 brew "bufbuild/buf/buf"
 # A simple terminal UI for git commands, written in Go
 brew "jesseduffield/lazygit/lazygit"
+# Drop in replacement for ueberzug written in C++
+brew "jstkdng/programs/ueberzugpp"
 # KCL Command Line Interface
 brew "kcl-lang/tap/kcl"
 # High-performance, schema-free, document-oriented database
 brew "mongodb/brew/mongodb-community"
+brew "streamingfast/tap/substreams"
 # Convert images into ascii art
 brew "thezoraiz/ascii-image-converter/ascii-image-converter"
 # AeroSpace is an i3-like tiling window manager for macOS
@@ -241,7 +248,5 @@ cask "vial"
 cask "vlc"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
-# Docker desktop
-cask "docker"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-vscode-remote.remote-containers"

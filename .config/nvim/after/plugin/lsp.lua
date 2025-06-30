@@ -49,6 +49,7 @@ require('mason-lspconfig').setup({
     'yamlls',
     'vimls',
     'lua_ls',
+    'rust_analyzer',
   },
   handlers = {
     function(server_name)

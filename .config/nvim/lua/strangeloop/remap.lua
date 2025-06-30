@@ -142,8 +142,6 @@ vim.keymap.set('x', '<leader>p', '"_dp')
 
 -- Yank into the system paste register instead of vim's paste register. Sweet.
 vim.keymap.set('n', '<leader>y', '"+y')
-
-vim.keymap.set('n', '<leader>y', '"+y')
 vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>Y', '"+Y')
 
