@@ -1,10 +1,10 @@
 -- <leader> is space, cause that makes sense, and also cause Primagen does it.
 vim.g.mapleader = " "
 
--- Not sure how much I will honestly use this but it is pretty sweet to have a toggle-able
--- terminal window that remembers past state, as opposed to using tmux to make a new pane or something
+-- toggle a floating terminal window - super handy!
 vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 
+-- toggle copilot chat pane and select which model to use
 vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>')
 vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>')
 
@@ -104,7 +104,7 @@ vim.keymap.set('n', '<M-h>', '<C-w>5<')
 vim.keymap.set('n', '<M-l>', '<C-w>5>')
 vim.keymap.set('n', '<M-k>', '<C-w>+5')
 vim.keymap.set('n', '<M-j>', '<C-w>-5')
- 
+
 -- Navigate to contexts in the barbecue.ui winbar
 vim.keymap.set('n', '<leader>bbq', function()
   context = vim.fn.input('Context: ')
