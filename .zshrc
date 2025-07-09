@@ -25,18 +25,9 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Personal aliases are set in $ZSH_CUSTOM/aliases.zsh
 
+# Path setup and initialization of starship, zoxide, etc. 
 export GPG_TTY='tty'
 export PINENTRY_USER_DATA="USE_CURSES=1"
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:~/.local/bin:/usr/local/bin:/Users/robertkotz/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:$PATH"
@@ -59,12 +50,17 @@ bindkey -s ^p "~/.local/bin/tmux-sessionizer\n"
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
 
+# autosuggestions and syntax highlighting for the CLI... supah hella choke dope. 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Start typing a command, and then up and down arrow keys will search through the command history
+# of commands that match the starting characters you've typed... So `yarn<up arrow>` will search through
+# previous `yarn` commands, etc.
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
  
+# Duh. 
 export EDITOR="/opt/homebrew/bin/nvim"
 
 # a little shortcut for running yazi
@@ -80,6 +76,8 @@ function Y() {
 # ----- Bat (better cat) -----
 export BAT_THEME=fly16
 
+# fzf setup -- check out @joseanmartinez on YT, he has a great video on fzf and more or less everything from here to the end of this
+# file is sourced from there.
 source <(fzf --zsh)
 
 # --- setup fzf theme ---
