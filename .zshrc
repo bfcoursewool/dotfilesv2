@@ -25,8 +25,6 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
-# Personal aliases are set in $ZSH_CUSTOM/aliases.zsh
-
 # Path setup and initialization of starship, zoxide, etc. 
 export GPG_TTY='tty'
 export PINENTRY_USER_DATA="USE_CURSES=1"
@@ -129,3 +127,61 @@ _fzf_compgen_dir() {
 
 source ~/.config/fzf/fzf-git.sh/fzf-git.sh
 
+#### Personal aliases ####
+
+alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+# Convenient k8s aliases
+alias k="kubectl"
+alias kx="kubectx"
+alias kaf="kubectl apply -f "
+alias kdf="kubectl delete -f "
+
+# vim is the new vi, nvim is the new vim. duh. 
+alias vi="/usr/bin/vim"
+#alias vim="nvim"
+alias vim="/opt/homebrew/bin/nvim"
+
+# brew install / uninstall / search shortcuts cause why not
+alias bi="brew install"
+alias bu="brew uninstall"
+alias bs="brew search"
+
+# Grep with color is better
+export GREP_COLORS='mt=1;35;40'
+alias grep="grep --color"
+alias egrep="egrep --color"
+
+# Use colorized less
+alias less="cless"
+
+# mirroring the starship history plugin with hs and hsi, but for `dirs -v`
+# but really, don't use this. <C-r> is integrated with fzf, and it's the better
+# way to search your command history.
+alias ds='d | grep'
+alias dsi='d | grep -i'
+
+# omz somehow misses this one I guess?
+alias 0='cd -0'
+
+# Common typos may as well just do what I want them to.
+# But also don't use this... <C-l> is the way.
+alias cledar="clear"
+
+# eza is ls but with cool icons I guess. nice.
+alias ls="eza --icons=always --git"
+alias ll="ls -lh -snew -t changed"
+alias la="ls -alh -snew -t changed"
+
+# aliasing cd to use zoxide instead of coreutils cd
+alias cd="z"
+
+# similarly. aliasing cat to use bat cause it's just better
+alias cat="bat"
+
+# This deconflicts a yazi thing with some aliases that already exist from the
+# yarn plugin from oh-my-zsh... `ya` already means `yarn add`, so yazi's `ya' 
+# can't be `ya` anymore. Fortunately yazi's `ya` is not something I need to use
+# and I've already forgotten whatever I needed to use it for in the first place, but
+# in case something pops up in the future, it's `yza` now instead.
+alias yza="/opt/homebrew/Cellar/yazi/25.4.8/bin/ya"
