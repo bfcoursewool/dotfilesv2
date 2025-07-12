@@ -1,5 +1,6 @@
 local lsp_zero = require('lsp-zero')
-require('lspconfig').intelephense.setup({})
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+require('lspconfig').intelephense.setup({ capabilities = capabilities })
 
 lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
