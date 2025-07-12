@@ -235,22 +235,19 @@ require('lazy').setup({
     'saghen/blink.cmp',
     dependencies = { 'rafamadriz/friendly-snippets' },
     version = '1.*',
-
     opts = {
       keymap = { preset = 'default' },
-
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono'
       },
-
       signature = { enabled = true },
-
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
     opts_extend = { "sources.default" }
   }, 
 
+  -- Surround arbitrary selections with an arbitrary character, function, or html tag!
   {
     "kylechui/nvim-surround",
     version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
@@ -282,6 +279,7 @@ require('lazy').setup({
     end
   },
 
+  -- Copilot chat gives a nice little Cursor-style interface to chat with an LLM within a coding session. 
   {
     {
       "CopilotC-Nvim/CopilotChat.nvim",
@@ -310,24 +308,19 @@ require('lazy').setup({
       require'eyeliner'.setup {
         -- show highlights only after keypress
         highlight_on_key = true,
-
         -- dim all other characters if set to true (recommended!)
         dim = true,            
-
         -- set the maximum number of characters eyeliner.nvim will check from
         -- your current cursor position; this is useful if you are dealing with
         -- large files: see https://github.com/jinh0/eyeliner.nvim/issues/41
         max_length = 9999,
-
         -- filetypes for which eyeliner should be disabled;
         -- e.g., to disable on help files:
         -- disabled_filetypes = {"help"}
         disabled_filetypes = {},
-
         -- buftypes for which eyeliner should be disabled
         -- e.g., disabled_buftypes = {"nofile"}
         disabled_buftypes = {},
-
         -- add eyeliner to f/F/t/T keymaps;
         -- see section on advanced configuration for more information
         default_keymaps = true,
@@ -361,7 +354,6 @@ require('lazy').setup({
     config = function()
       require("nvim-treesitter.configs").setup({
         textobjects = {
-
           select = {
             enable = true,
             -- Automatically jump forward to textobj, similar to targets.vim
@@ -421,7 +413,7 @@ require('lazy').setup({
               ["[m"] = { query = "@function.outer", desc = "Prev method/function def start" },
               -- This one conflicts with a remap that takes me to the containing context, and since I don't currently
               -- work with a lot of code that uses classes, I'm choosing to sacrifice this previous class motion so I can
-              -- hold onto the "go to context" motion I already have an am used to.
+              -- hold onto the "go to context" motion I already have and am used to.
               -- ["[c"] = { query = "@class.outer", desc = "Prev class start" },
               ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
               ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
@@ -440,6 +432,10 @@ require('lazy').setup({
 
       local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
+      -- So if you use one of the goto_next_start/goto_next_end/etc. options above, you might want to continue
+      -- iterating through the matches, like with `n/N` for search or `;/,` for fFtT motions... I couldn't manage
+      -- to figure out a way to use `;/,` with these, which I would have preferred, so instead we have `'/"` for next/
+      -- prev match when searching using these custom goto_next/goto_previous things.
       local function repeat_and_center(forward)
         return function()
           local ok = forward and ts_repeat_move.repeat_last_move()
@@ -471,7 +467,8 @@ require('lazy').setup({
   -- A UI Component library for nvim, used by noice.nvim
   'MunifTanjim/nui.nvim',
 
-  -- A CMDLine bar, also for search. 
+  -- Makes a nice little visually centered popup window bar thing for entering `:<Command>` type things, for 
+  -- grepping, etc. Just a UI nicety, really. 
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -488,8 +485,8 @@ require('lazy').setup({
     }
   },
 
-  -- A replacement for netrw... this is basically a file management tool that you manipulate like a buffer. 
-  -- It's super cool and good.
+  -- A replacement for netrw... this is basically a file management tool that lets you manipulate the filesystem
+  -- like a regular text buffer. It's super cool and good.
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
@@ -537,7 +534,7 @@ require('lazy').setup({
     },
   },
 
-  -- Trying out a statusline plugin...
+  -- A nice little statusline plugin that I like.
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
@@ -613,12 +610,6 @@ require('lazy').setup({
       require('render-markdown').setup({})
     end,
   },
-
-  -- I'm pretty sure this is a dependency for one of these plugins, but I can't remember which now.
-  -- {
-  --   'vhyrro/luarocks.nvim', -- Luarocks manager for Neovim
-  --   priority = 1000,        -- Load Luarocks early to ensure Lua modules are available
-  -- },
 
   -- Fancy icons! Gotta have a NerdFont installed for this one to work. 
   'nvim-tree/nvim-web-devicons',
