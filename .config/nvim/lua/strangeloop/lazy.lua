@@ -471,14 +471,14 @@ require('lazy').setup({
     end
   },
 
---   -- Snippets
---   {
---     "L3MON4D3/LuaSnip",
---     -- follow latest release.
---     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
---     -- install jsregexp (optional!).
---     build = "make install_jsregexp"
---   },
+  -- Snippets
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp"
+  },
 
   -- Color codes nested delimiters for easier readability
   'HiPhish/rainbow-delimiters.nvim',
@@ -573,19 +573,16 @@ require('lazy').setup({
     'mbbill/undotree',
   },
 
-  -- Language Server Protocol client! All kinds of wizardry available from this sucker. 
   {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v3.x',
-	  dependencies = {
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-		  {'neovim/nvim-lspconfig'},
-		  --{'hrsh7th/nvim-cmp'},
-		  --{'hrsh7th/cmp-nvim-lsp'},
-		  {'L3MON4D3/LuaSnip'},
-	  }
+    'williamboman/mason.nvim',
   },
+  {
+    'williamboman/mason-lspconfig.nvim',
+  },
+  {
+    'neovim/nvim-lspconfig',
+  },
+
 
   -- Nobody wants ugly code. 
   {
