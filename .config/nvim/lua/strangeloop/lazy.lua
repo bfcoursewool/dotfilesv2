@@ -231,6 +231,7 @@ require('lazy').setup({
     cmd = 'Nerdy',
   },
 
+  -- A nice autocomplete plugin
   {
     'saghen/blink.cmp',
     dependencies = { 'rafamadriz/friendly-snippets' },
@@ -242,10 +243,26 @@ require('lazy').setup({
         nerd_font_variant = 'mono'
       },
       signature = { enabled = true },
-      fuzzy = { implementation = "prefer_rust_with_warning" }
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+      completion = {
+        trigger = {
+          show_on_blocked_trigger_characters = {},
+          show_on_x_blocked_trigger_characters = {},
+        },
+        ghost_text = { enabled = false }, -- Disable ghost text for performance
+      },
     },
-    opts_extend = { "sources.default" }
-  }, 
+    opts_extend = { "sources.default" },
+    config = function(_, opts)
+      require('blink.cmp').setup(opts)
+      -- Optimize buffer leave behavior
+      vim.api.nvim_create_autocmd("BufLeave", {
+        callback = function()
+          require('blink.cmp').hide()
+        end,
+      })
+    end,
+  },
 
   -- Surround arbitrary selections with an arbitrary character, function, or html tag!
   {
@@ -454,14 +471,16 @@ require('lazy').setup({
     end
   },
 
-  {
-    "L3MON4D3/LuaSnip",
-    -- follow latest release.
-    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    -- install jsregexp (optional!).
-    build = "make install_jsregexp"
-  },
+--   -- Snippets
+--   {
+--     "L3MON4D3/LuaSnip",
+--     -- follow latest release.
+--     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+--     -- install jsregexp (optional!).
+--     build = "make install_jsregexp"
+--   },
 
+  -- Color codes nested delimiters for easier readability
   'HiPhish/rainbow-delimiters.nvim',
 
   -- A UI Component library for nvim, used by noice.nvim
@@ -531,6 +550,8 @@ require('lazy').setup({
     },
     opts = {
       -- configurations go here
+      attach_navic = false,
+      show_modified = false,
     },
   },
 
@@ -595,6 +616,8 @@ require('lazy').setup({
       require('auto-session').setup({
         auto_restore = false,
         auto_save = true,
+        save_extra_commands = {},
+        suppressed_dirs = { '~/', '~/Downloads/', '/tmp' },
       })
     end
   },

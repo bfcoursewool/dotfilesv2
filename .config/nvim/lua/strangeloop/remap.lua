@@ -7,6 +7,10 @@ vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 -- toggle copilot chat pane and select which model to use
 vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>')
 vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>')
+vim.keymap.set('n', '<leader>cs', function()
+  chatFileName = vim.fn.input('Save Chat > ')
+  if chatFileName ~= '' then vim.cmd.CopilotChatSave(chatFileName) end
+end)
 
 -- Harpoon keybindings
 local mark = require('harpoon.mark')
@@ -15,7 +19,7 @@ local ui = require('harpoon.ui')
 vim.keymap.set('n', '<leader>a', mark.add_file)
 vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
 
-vim.keymap.set('n', '<c-h>', function() ui.nav_file(1) end)
+vim.keymap.set('n', '<C-h>', function() ui.nav_file(1) end)
 vim.keymap.set('n', '<C-j>', function() ui.nav_file(2) end)
 vim.keymap.set('n', '<C-k>', function() ui.nav_file(3) end)
 vim.keymap.set('n', '<C-l>', function() ui.nav_file(4) end)
@@ -40,11 +44,11 @@ vim.keymap.set('n', '<leader>f', ':Telescope nerdy<CR>')
 vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open directory view' })
 
 -- fuzzy find all files, just git files, or do a grep! all with telescope.
-local builtin = require('telescope.builtin');
-vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+local telescope_builtin = require('telescope.builtin');
+vim.keymap.set('n', '<leader>pf', telescope_builtin.find_files, {})
+vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") });
+	telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 
 -- The vimgrep version of '<leader>ps'... stores results in the QuickFix list.
@@ -56,15 +60,15 @@ vim.keymap.set('n', "<leader>pg", function()
 end)
 
 -- Shortcuts for working with the QuickFix list
-vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>')
-vim.keymap.set('n', '<leader>cq', '<cmd>cclose<CR>')
-vim.keymap.set('n', '<leader>rq', function()
+vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>') -- open qf list
+vim.keymap.set('n', '<leader>cq', '<cmd>cclose<CR>') -- close qf list
+vim.keymap.set('n', '<leader>rq', function() -- clear qf list
   vim.fn.setqflist({}, 'f')
 end)
-vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>')
-vim.keymap.set('n', ']Q', '<cmd>clast<CR>')
-vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>') -- first qf item
+vim.keymap.set('n', ']Q', '<cmd>clast<CR>') -- last qf item
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz') -- next qf item
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz') -- previous qf item
 
 -- lvimgrep shortcut... when you want your vimgrep results to go in the location list
 -- instead of the quickfix list

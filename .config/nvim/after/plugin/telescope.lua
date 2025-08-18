@@ -12,9 +12,10 @@ require("telescope").setup{
         -- Shift-Tab to deselect and move up
         ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<M-q>"] = actions.add_to_qflist + actions.open_qflist,
       },
     },
-    file_ignore_patterns = { 
+    file_ignore_patterns = {
       "node_modules",
       "dist",
       "yarn.lock"
