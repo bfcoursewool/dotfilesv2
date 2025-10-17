@@ -4,4 +4,4 @@
 .config/yarn/
 .config/gtk-2.0/
 .config/builder/
-
+~/.dotfiles-secrets

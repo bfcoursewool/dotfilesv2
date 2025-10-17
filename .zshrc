@@ -19,6 +19,10 @@ plugins=(colored-man-pages colorize history forklift taskwarrior yarn)
 
 source $ZSH/oh-my-zsh.sh
 
+if [ -f ~/.dotfiles-secrets ]; then
+  source ~/.dotfiles-secrets
+fi
+
 ##################### User configs ###############################
 
 # You may need to manually set your language environment
