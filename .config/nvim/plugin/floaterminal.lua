@@ -1,4 +1,3 @@
-
 local state = {
   floating = {
     buf = -1,

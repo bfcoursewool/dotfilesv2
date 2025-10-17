@@ -301,9 +301,14 @@ require('lazy').setup({
     {
       "CopilotC-Nvim/CopilotChat.nvim",
       dependencies = {
-        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        "zbirenbaum/copilot.lua",
+        "nvim-lua/plenary.nvim",
+        "robitx/mcphub.nvim",
       },
+      config = function()
+        require('strangeloop.mcphub')
+        require('strangeloop.CopilotChat')
+      end,
       build = "make tiktoken", -- Only on MacOS or Linux
       opts = {
         -- See Configuration section for options
@@ -314,6 +319,17 @@ require('lazy').setup({
       },
       -- See Commands section for default commands if you want to lazy load on them
     },
+  },
+
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    build = "npm install -g mcp-hub@latest",  -- Installs `mcp-hub` node binary globally
+    config = function()
+      require("mcphub").setup()
+    end
   },
 
   -- Adds character highlighting for fFtT so you can see at a glance which 
@@ -471,14 +487,14 @@ require('lazy').setup({
     end
   },
 
---   -- Snippets
---   {
---     "L3MON4D3/LuaSnip",
---     -- follow latest release.
---     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
---     -- install jsregexp (optional!).
---     build = "make install_jsregexp"
---   },
+  -- Snippets
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp"
+  },
 
   -- Color codes nested delimiters for easier readability
   'HiPhish/rainbow-delimiters.nvim',
@@ -573,19 +589,19 @@ require('lazy').setup({
     'mbbill/undotree',
   },
 
-  -- Language Server Protocol client! All kinds of wizardry available from this sucker. 
-  {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v3.x',
-	  dependencies = {
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-		  {'neovim/nvim-lspconfig'},
-		  --{'hrsh7th/nvim-cmp'},
-		  --{'hrsh7th/cmp-nvim-lsp'},
-		  {'L3MON4D3/LuaSnip'},
-	  }
-  },
+   -- Language Server Protocol client! All kinds of wizardry available from this sucker. 
+   {
+	   'VonHeikemen/lsp-zero.nvim',
+	   branch = 'v3.x',
+	   dependencies = {
+	 	  {'williamboman/mason.nvim'},
+	 	  {'williamboman/mason-lspconfig.nvim'},
+	 	  {'neovim/nvim-lspconfig'},
+	 	  --{'hrsh7th/nvim-cmp'},
+	 	  --{'hrsh7th/cmp-nvim-lsp'},
+	 	  {'L3MON4D3/LuaSnip'},
+	   }
+   },
 
   -- Nobody wants ugly code. 
   {

@@ -11,6 +11,10 @@ vim.keymap.set('n', '<leader>cs', function()
   chatFileName = vim.fn.input('Save Chat > ')
   if chatFileName ~= '' then vim.cmd.CopilotChatSave(chatFileName) end
 end)
+vim.keymap.set('n', '<leader>cl', function()
+  chatFileName = vim.fn.input('Load Chat > ')
+  if chatFileName ~= '' then vim.cmd.CopilotChatLoad(chatFileName) end
+end)
 
 -- Harpoon keybindings
 local mark = require('harpoon.mark')
@@ -33,12 +37,12 @@ vim.keymap.set("n", "<leader>go", function() Snacks.gitbrowse() end)
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Navigate to dashboard with the quickness...
-vim.keymap.set('n', '<leader>d', function()
+vim.keymap.set('n', '<leader>h', function()
   Snacks.dashboard()
 end)
 
 -- A little finder to select NerdFont icons
-vim.keymap.set('n', '<leader>f', ':Telescope nerdy<CR>')
+vim.keymap.set('n', '<leader>i', ':Telescope nerdy<CR>')
 
 -- jump into a directory view of the parent directory of whatever file you have open at the moment
 vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open directory view' })
@@ -49,6 +53,27 @@ vim.keymap.set('n', '<leader>pf', telescope_builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
 	telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
+end)
+
+-- Grep the quickfix list only
+vim.keymap.set('n', '<leader>pq', function()
+    local qf_files = {}
+    for _, item in ipairs(vim.fn.getqflist()) do
+        local bufname = vim.fn.bufname(item.bufnr)
+        if bufname ~= "" then
+            table.insert(qf_files, bufname)
+        end
+    end
+    
+    if #qf_files == 0 then
+        print("No files in quickfix list")
+        return
+    end
+    
+    telescope_builtin.grep_string({
+        search = vim.fn.input("Grep quickfix > "),
+        search_dirs = qf_files
+    })
 end)
 
 -- The vimgrep version of '<leader>ps'... stores results in the QuickFix list.
@@ -79,16 +104,19 @@ vim.keymap.set('n', "<leader>pl", function()
   vim.cmd.lopen()
 end)
 
--- Keymaps for working with the location list... open, close, next, prev
-vim.keymap.set('n', '<leader>l', '<cmd>lopen<CR>')
-vim.keymap.set('n', '<leader>cl', '<cmd>lclose<CR>')
--- Now that I have treesitter-textobjects set up, I'm using [l and ]l to navigate forward and
--- back in the document from loop to loop. I almost never use the location list anyway, so those
--- keymaps are now taking precedence of these, but [L and ]L don't conflict, so I'll just break the
--- pattern of the QF list and buffer list navigation that I have here and use ]L and [L for next/prev
--- in the location list.
-vim.keymap.set('n', ']L', '<cmd>lnext<CR>')
-vim.keymap.set('n', '[L', '<cmd>lprev<CR>')
+-- I never use this location list stuff and it's now conflicting with something I want to do with CopilotChat
+-- so it gets commented and queued for eventual full deletion...
+--
+-- -- Keymaps for working with the location list... open, close, next, prev
+-- vim.keymap.set('n', '<leader>l', '<cmd>lopen<CR>')
+-- vim.keymap.set('n', '<leader>cl', '<cmd>lclose<CR>')
+-- -- Now that I have treesitter-textobjects set up, I'm using [l and ]l to navigate forward and
+-- -- back in the document from loop to loop. I almost never use the location list anyway, so those
+-- -- keymaps are now taking precedence of these, but [L and ]L don't conflict, so I'll just break the
+-- -- pattern of the QF list and buffer list navigation that I have here and use ]L and [L for next/prev
+-- -- in the location list.
+-- vim.keymap.set('n', ']L', '<cmd>lnext<CR>')
+-- vim.keymap.set('n', '[L', '<cmd>lprev<CR>')
 
 -- Similar shortcuts but for buffers. 
 vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search

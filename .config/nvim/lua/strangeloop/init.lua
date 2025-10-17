@@ -21,6 +21,8 @@ require("strangeloop.set")
 require('strangeloop.autocommands')
 require('strangeloop.strikethrough')
 require('strangeloop.luasnip')
+require('strangeloop.CopilotChat')
+require('strangeloop.mcphub')
 require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip/"})
 
 vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true, sp = "#800080" })

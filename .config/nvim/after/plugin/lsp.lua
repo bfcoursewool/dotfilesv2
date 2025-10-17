@@ -1,6 +1,10 @@
 local lsp_zero = require('lsp-zero')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
-require('lspconfig').intelephense.setup({ capabilities = capabilities })
+
+vim.lsp.config('intelephense', {
+  cmd = { 'intelephense', '--stdio' },
+  capabilities = capabilities,
+})
 
 lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
@@ -12,21 +16,20 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set('n', '<leader>dl', '<cmd>Telescope diagnostics<cr>', { buffer = 0 })
+  vim.keymap.set('n', '<leader>ld', '<cmd>Telescope diagnostics<cr>', { buffer = 0 })
   vim.keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references, { buffer = 0 })
   vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
   vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set('n', '<leader>h', function() vim.lsp.buf.signature_help() end, opts)
 end)
 
 -- Restore inline diagnostic text
 vim.diagnostic.config({
   virtual_text = {
     spacing = 2,          -- distance to the line
-    prefix  = "●",        -- could be '', '●', '·', or '' for no icon
+    prefix  = "●",        -- could be '', '●', '·', or '' for no icon
     severity = nil,       -- show all severities
   },
   signs = true,           -- keep gutter signs
@@ -56,8 +59,8 @@ require('mason-lspconfig').setup({
   },
   handlers = {
     function(server_name)
-      require('lspconfig')[server_name].setup({})
+      vim.lsp.config(server_name, {})
+      vim.lsp.enable(server_name)
     end,
   }
 })
-

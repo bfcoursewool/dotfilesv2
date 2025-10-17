@@ -38,3 +38,10 @@ vim.opt.fixendofline = true
 vim.g.mapleader = " "
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.opt.exrc = true
+vim.opt.secure = true
+
+--vim.opt_local.errorformat = "%f(%l\\,%c): %t%*[^:]: %m"
+--vim.opt_local.makeprg = [[cd modules/server && yarn tsc --noEmit 2>&1 \| sed 's\|^\|modules/server/\|']]
+
