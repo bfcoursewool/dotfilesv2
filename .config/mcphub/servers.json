@@ -1,0 +1,114 @@
+{
+  "mcpServers": {
+    "brave_search": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "command": "npx",
+      "disabled": false,
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx",
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": "${DEFAULT_MINIMUM_TOKENS}"
+      }
+    },
+    "fetch": {
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx"
+    },
+    "figma": {
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key=${FIGMA_API_KEY}",
+        "--stdio"
+      ],
+      "command": "npx",
+      "env": {
+        "FIGMA_API_KEY": "${FIGMA_API_KEY}"
+      }
+    },
+    "filesystem_config": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/robertkotz/.config"
+      ],
+      "command": "npx"
+    },
+    "filesystem_work": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/robertkotz/Work"
+      ],
+      "command": "npx"
+    },
+    "git_app_infra": {
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/robertkotz/Work/application-infrastructure"
+      ],
+      "command": "uvx",
+      "env": {
+        "GIT_DIR": "/Users/robertkotz/Work/application-infrastructure/.git"
+      }
+    },
+    "git_fre": {
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/robertkotz/Work/forte-rules-engine"
+      ],
+      "command": "uvx",
+      "env": {
+        "GIT_DIR": "/Users/robertkotz/Work/forte-rules-engine/.git"
+      }
+    },
+    "git_fre_ui": {
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/robertkotz/Work/forte-rules-engine-ui"
+      ],
+      "command": "uvx",
+      "env": {
+        "GIT_DIR": "/Users/robertkotz/Work/forte-rules-engine-ui/.git"
+      }
+    },
+    "git_liquidity": {
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/robertkotz/Work/liquidity-altbc"
+      ],
+      "command": "uvx",
+      "env": {
+        "GIT_DIR": "/Users/robertkotz/Work/liquidity-altbc/.git"
+      }
+    },
+    "git_liquidity_ui": {
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/robertkotz/Work/liquidity-ui"
+      ],
+      "command": "uvx",
+      "env": {
+        "GIT_DIR": "/Users/robertkotz/Work/liquidity-ui/.git"
+      }
+    }
+  }
+}

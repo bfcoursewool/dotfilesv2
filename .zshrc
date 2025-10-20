@@ -19,9 +19,12 @@ plugins=(colored-man-pages colorize history forklift taskwarrior yarn)
 
 source $ZSH/oh-my-zsh.sh
 
+# MCP Server vars
 if [ -f ~/.dotfiles-secrets ]; then
   source ~/.dotfiles-secrets
 fi
+export DEFAULT_MINIMUM_TOKENS=6000
+
 
 ##################### User configs ###############################
 

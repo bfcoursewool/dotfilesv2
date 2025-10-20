@@ -298,38 +298,31 @@ require('lazy').setup({
 
   -- Copilot chat gives a nice little Cursor-style interface to chat with an LLM within a coding session. 
   {
-    {
-      "CopilotC-Nvim/CopilotChat.nvim",
-      dependencies = {
-        "zbirenbaum/copilot.lua",
-        "nvim-lua/plenary.nvim",
-        "robitx/mcphub.nvim",
-      },
-      config = function()
-        require('strangeloop.mcphub')
-        require('strangeloop.CopilotChat')
-      end,
-      build = "make tiktoken", -- Only on MacOS or Linux
-      opts = {
-        -- See Configuration section for options
-        window = {
-          layout = 'vertical',
-          width = 0.40,
-        },
-      },
-      -- See Commands section for default commands if you want to lazy load on them
-    },
-  },
-
-  {
-    "ravitemer/mcphub.nvim",
+    "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      {
+        "ravitemer/mcphub.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+        build = "npm install -g mcp-hub@latest",
+        config = function()
+          require('strangeloop.mcphub')
+        end
+      },
     },
-    build = "npm install -g mcp-hub@latest",  -- Installs `mcp-hub` node binary globally
     config = function()
-      require("mcphub").setup()
-    end
+      require('strangeloop.CopilotChat')
+    end,
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+      window = {
+        layout = 'vertical',
+        width = 0.40,
+      },
+    },
   },
 
   -- Adds character highlighting for fFtT so you can see at a glance which 
