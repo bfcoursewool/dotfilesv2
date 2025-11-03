@@ -4,6 +4,11 @@ local action_state = require('telescope.actions.state')
 
 require('telescope').load_extension('nerdy')
 require("telescope").setup{
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+  },
   defaults = {
     mappings = {
       i = {
@@ -18,7 +23,7 @@ require("telescope").setup{
     file_ignore_patterns = {
       "node_modules",
       "dist",
-      "yarn.lock"
+      "yarn.lock",
     }
   }
 }

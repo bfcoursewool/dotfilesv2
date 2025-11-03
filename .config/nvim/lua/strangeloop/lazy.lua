@@ -284,6 +284,11 @@ require('lazy').setup({
     end
   },
 
+  {
+    "karb94/neoscroll.nvim",
+    opts = {},
+  },
+
   -- Trying out leap.nvim... just gives a nice consolidated method for leaping
   -- to specific locations in a file, sort of consolidating fFtT, /, ?, hjkl, etc.
   -- into a single search interface.

@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 -- toggle a floating terminal window - super handy!
 vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 
--- toggle copilot chat pane and select which model to use
+-- CopilotChat.nvim bindings. Toggle chat open/closed, select model, save and load sessions.
 vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>')
 vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>')
 vim.keymap.set('n', '<leader>cs', function()
@@ -189,8 +189,8 @@ vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
 -- for clearing / closing / hiding any currently open notification popups.
 vim.keymap.set('n', '<leader>nl', '<cmd>Noice last<CR>')
 vim.keymap.set('n', '<leader>nh', '<cmd>Noice history<CR>')
-vim.keymap.set('n', '<leader>nx', function() 
-  Snacks.notifier.hide() 
+vim.keymap.set('n', '<leader>nx', function()
+  Snacks.notifier.hide()
 end, { desc = 'Hide notifier popups' })
 
 -- Spellcheck stuff...
