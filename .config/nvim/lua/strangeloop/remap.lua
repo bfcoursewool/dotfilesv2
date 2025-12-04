@@ -51,8 +51,12 @@ vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open directory view' })
 local telescope_builtin = require('telescope.builtin');
 vim.keymap.set('n', '<leader>pf', telescope_builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, {})
-vim.keymap.set('n', '<leader>ps', function()
+-- case sensitive and case-insensitive search options...
+vim.keymap.set('n', '<leader>pS', function()
 	telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
+end)
+vim.keymap.set('n', '<leader>ps', function()
+	telescope_builtin.grep_string({ search = vim.fn.input("Grep > "), additional_args = { "-i" } });
 end)
 
 -- Grep the quickfix list only

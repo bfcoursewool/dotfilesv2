@@ -25,6 +25,7 @@ if [ -f ~/.dotfiles-secrets ]; then
 fi
 export DEFAULT_MINIMUM_TOKENS=6000
 
+export SDKROOT=$(xcrun --show-sdk-path)
 
 ##################### User configs ###############################
 
