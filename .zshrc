@@ -33,10 +33,14 @@ export SDKROOT=$(xcrun --show-sdk-path)
 # export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
+# For the perpetuals-api-server project, we use the `tools` feature in go.mod and it needs to be 
+# explicitly enabled for gopls to recognize it as valid!
+export GOEXPERIMENT=tools
+
 # Path setup and initialization of starship, zoxide, etc. 
 export GPG_TTY='tty'
 export PINENTRY_USER_DATA="USE_CURSES=1"
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:~/.local/bin:/usr/local/bin:/Users/robertkotz/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.local/bin:/usr/local/bin:/Users/robertkotz/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:$PATH"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 autoload -Uz compinit && compinit

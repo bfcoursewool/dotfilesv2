@@ -1,26 +1,9 @@
--- The idea here was to have a function that returns a random cmd for the dashboard header
--- so I'd get a different one each time I launch vim, but it's not working, so this will
--- just sit here until I figure it out, but also it is a nice little collection of demo 
--- cmds that you can potentially use to get your sweet ASCII art header... Between 
--- ASCII-image-converter, chafa, and lolcat, you can do some pretty fun stuff. 
-local function fetch_random_header()
-  local strings = {
-    '~/.config/nvim/animate-rainbow-header.sh ~/.config/nvim/assets/ascii-wolfy-thrack.txt',
-    '~/.config/nvim/animate-rainbow-header.sh ~/.config/nvim/assets/chafa-header.txt',
-    'chafa --size=100x30 /Users/robertkotz/.config/nvim/assets/final-header.png',
-    'cat ~/.config/nvim/assets/ascii-wolfy-thrack.txt',
-    'ascii-image-converter -d 100,30 -C ~/.config/nvim/assets/final-header.png | lolcat -F 0.3',
-  }
-  local random_index = math.random(1, #strings)
-  return strings[random_index]
-end
-
 require('lazy').setup({
   checker = {
     enabled = true
   },
   -- Snacks is a snazzy new set of plugins from folke. This sets up a sick dashboard
-  -- and also turns on/configures the notifier, though I'm not honestly sure how exactly 
+  -- and also turns on/configures the notifier, though I'm not honestly sure how exactly
   -- to make the best use of it just yet.
   {
     "folke/snacks.nvim",
@@ -54,8 +37,8 @@ require('lazy').setup({
             },
           },
           { section = 'startup', padding = 1 },
-          { icon = '󰏓 ', title = 'Projects', limit=5, section = 'projects', indent = 2, padding = 1 },
-          { icon = ' ', title = 'Recent Files', limit=8, section = 'recent_files', indent = 2, padding = 1 },
+          { icon = '󰏓 ', title = 'Projects', limit = 5, section = 'projects', indent = 2, padding = 1 },
+          { icon = ' ', title = 'Recent Files', limit = 8, section = 'recent_files', indent = 2, padding = 1 },
           function()
             local in_git = Snacks.git.get_root() ~= nil
             local cmds = {
@@ -70,20 +53,20 @@ require('lazy').setup({
               return vim.tbl_extend("force", {
                 section = "terminal",
                 enabled = in_git,
-                align='center',
+                align = 'center',
                 indent = 2,
                 padding = 1,
                 ttl = 5 * 60,
               }, cmd)
             end, cmds)
           end,
-          { text = '', action = ':Lazy update', key = 'u' },
+          { text = '', action = ':Lazy update',          key = 'u' },
           { text = '', action = ':Telescope find_files', key = 'f' },
-          { text = '', action = ':Telescope builtin', key = 'a' },
-          { text = '', action = ':TelescopeDotfiles', key = 'd' },
-          { text = '', action = ':checkhealth', key = 'h' },
-          { text = '', action = ':SessionRestore', key = 'l' },
-          { text = '', action = ':qa', key = 'q' },
+          { text = '', action = ':Telescope builtin',    key = 'a' },
+          { text = '', action = ':TelescopeDotfiles',    key = 'd' },
+          { text = '', action = ':checkhealth',          key = 'h' },
+          { text = '', action = ':AutoSession restore',  key = 'l' },
+          { text = '', action = ':qa',                   key = 'q' },
         },
       },
 
@@ -95,7 +78,7 @@ require('lazy').setup({
         height = { min = 1, max = 0.6 },
         -- editor margin to keep free. tabline and statusline are taken into account automatically
         margin = { top = 0, right = 1, bottom = 0 },
-        padding = true, -- add 1 cell of left/right padding to the notification window
+        padding = true,              -- add 1 cell of left/right padding to the notification window
         sort = { "level", "added" }, -- sort by level and time
         -- minimum log level to display. TRACE is the lowest
         -- all notifications are stored in history
@@ -112,7 +95,7 @@ require('lazy').setup({
         end,
         ---@type snacks.notifier.style
         style = "compact",
-        top_down = true, -- place notifications from top to bottom
+        top_down = true,    -- place notifications from top to bottom
         date_format = "%R", -- time format for notifications
         -- format for footer when more lines are available
         -- %d is replaced with the number of lines.
@@ -122,7 +105,7 @@ require('lazy').setup({
         refresh = 50, -- refresh at most every 50ms
       },
 
-      -- lazygit integration is dope. 
+      -- lazygit integration is dope.
       lazygit = {
         -- automatically configure lazygit to use the current colorscheme
         -- and integrate edit with the current neovim instance
@@ -178,18 +161,18 @@ require('lazy').setup({
         line_end = nil, ---@type number?
         -- patterns to transform remotes to an actual URL
         remote_patterns = {
-          { "^(https?://.*)%.git$"              , "%1" },
-          { "^git@(.+):(.+)%.git$"              , "https://%1/%2" },
-          { "^git@(.+):(.+)$"                   , "https://%1/%2" },
-          { "^git@(.+)/(.+)$"                   , "https://%1/%2" },
-          { "^ssh://git@(.*)$"                  , "https://%1" },
-          { "^ssh://([^:/]+)(:%d+)/(.*)$"       , "https://%1/%3" },
-          { "^ssh://([^/]+)/(.*)$"              , "https://%1/%2" },
+          { "^(https?://.*)%.git$",               "%1" },
+          { "^git@(.+):(.+)%.git$",               "https://%1/%2" },
+          { "^git@(.+):(.+)$",                    "https://%1/%2" },
+          { "^git@(.+)/(.+)$",                    "https://%1/%2" },
+          { "^ssh://git@(.*)$",                   "https://%1" },
+          { "^ssh://([^:/]+)(:%d+)/(.*)$",        "https://%1/%3" },
+          { "^ssh://([^/]+)/(.*)$",               "https://%1/%2" },
           { "ssh%.dev%.azure%.com/v3/(.*)/(.*)$", "dev.azure.com/%1/_git/%2" },
-          { "^https://%w*@(.*)"                 , "https://%1" },
-          { "^git@(.*)"                         , "https://%1" },
-          { ":%d+"                              , "" },
-          { "%.git$"                            , "" },
+          { "^https://%w*@(.*)",                  "https://%1" },
+          { "^git@(.*)",                          "https://%1" },
+          { ":%d+",                               "" },
+          { "%.git$",                             "" },
         },
         url_patterns = {
           ["github%.com"] = {
@@ -210,6 +193,15 @@ require('lazy').setup({
         },
       },
     }
+  },
+
+  -- Experimenting with some artistic coding stuff via Strudel and Hydra!
+  {
+    "gruvw/strudel.nvim",
+    build = "npm ci",
+    config = function()
+      require("strudel").setup()
+    end,
   },
 
   -- gnupg integration for when you need to do s00per s3kr37 stuff.
@@ -284,6 +276,7 @@ require('lazy').setup({
     end
   },
 
+  -- Smooth scrolling for various motions like ctrl-d/ctrl-u and other big vertical jumps
   {
     "karb94/neoscroll.nvim",
     opts = {},
@@ -301,7 +294,7 @@ require('lazy').setup({
     end
   },
 
-  -- Copilot chat gives a nice little Cursor-style interface to chat with an LLM within a coding session. 
+  -- Copilot chat gives a nice little Cursor-style interface to chat with an LLM within a coding session.
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
@@ -330,17 +323,17 @@ require('lazy').setup({
     },
   },
 
-  -- Adds character highlighting for fFtT so you can see at a glance which 
+  -- Adds character highlighting for fFtT so you can see at a glance which
   -- character of each word is unique and can act as a search target for that
   -- line. Pretty nifty.
   {
     'jinh0/eyeliner.nvim',
     config = function()
-      require'eyeliner'.setup {
+      require 'eyeliner'.setup {
         -- show highlights only after keypress
         highlight_on_key = true,
         -- dim all other characters if set to true (recommended!)
-        dim = true,            
+        dim = true,
         -- set the maximum number of characters eyeliner.nvim will check from
         -- your current cursor position; this is useful if you are dealing with
         -- large files: see https://github.com/jinh0/eyeliner.nvim/issues/41
@@ -361,20 +354,20 @@ require('lazy').setup({
 
   -- Treesitter stuff... this gives us syntax highlighting and some fancy custom
   -- text objects. There's a treesitter.lua file in the plugins "after" directory
-  -- that has additional configs to be aware of. 
+  -- that has additional configs to be aware of.
   'nvim-treesitter/nvim-treesitter-context',
   {
-  	'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
-  	config = function ()
-  		require 'nvim-treesitter.install'.compilers = { "clang" }
-  	end,
+    config = function()
+      require 'nvim-treesitter.install'.compilers = { "clang" }
+    end,
     opts = {
       auto_install = true
     },
-	  build = ":TSUpdate",
+    build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
   },
   'nvim-treesitter/playground',
@@ -470,8 +463,8 @@ require('lazy').setup({
       local function repeat_and_center(forward)
         return function()
           local ok = forward and ts_repeat_move.repeat_last_move()
-          or ts_repeat_move.repeat_last_move_opposite()
-          if ok then                      -- only center if we really jumped
+              or ts_repeat_move.repeat_last_move_opposite()
+          if ok then -- only center if we really jumped
             vim.cmd("normal! zz")
           end
         end
@@ -500,8 +493,8 @@ require('lazy').setup({
   -- A UI Component library for nvim, used by noice.nvim
   'MunifTanjim/nui.nvim',
 
-  -- Makes a nice little visually centered popup window bar thing for entering `:<Command>` type things, for 
-  -- grepping, etc. Just a UI nicety, really. 
+  -- Makes a nice little visually centered popup window bar thing for entering `:<Command>` type things, for
+  -- grepping, etc. Just a UI nicety, really.
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -530,7 +523,7 @@ require('lazy').setup({
       require('oil').setup({
         default_file_explorer = true,
         delete_to_trash = true,
-        skip_confirm_for_simple_edits=true,
+        skip_confirm_for_simple_edits = true,
         view_options = {
           show_hidden = true,
           natural_order = true,
@@ -587,21 +580,21 @@ require('lazy').setup({
     'mbbill/undotree',
   },
 
-   -- Language Server Protocol client! All kinds of wizardry available from this sucker. 
-   {
-	   'VonHeikemen/lsp-zero.nvim',
-	   branch = 'v3.x',
-	   dependencies = {
-	 	  {'williamboman/mason.nvim'},
-	 	  {'williamboman/mason-lspconfig.nvim'},
-	 	  {'neovim/nvim-lspconfig'},
-	 	  --{'hrsh7th/nvim-cmp'},
-	 	  --{'hrsh7th/cmp-nvim-lsp'},
-	 	  {'L3MON4D3/LuaSnip'},
-	   }
-   },
+  -- Language Server Protocol client! All kinds of wizardry available from this sucker.
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      { 'neovim/nvim-lspconfig' },
+      --{'hrsh7th/nvim-cmp'},
+      --{'hrsh7th/cmp-nvim-lsp'},
+      { 'L3MON4D3/LuaSnip' },
+    }
+  },
 
-  -- Nobody wants ugly code. 
+  -- Nobody wants ugly code.
   {
     'prettier/vim-prettier',
     build = "yarn install --frozen-lockfile --production",
@@ -621,6 +614,11 @@ require('lazy').setup({
     }
   },
 
+  {
+    'stevearc/conform.nvim',
+    opts = {}
+  },
+
   -- Auto-session will automatically save my sessions, and then
   -- gives me a handy dandy SessionRestore command that I can hook
   -- up with the Snacks.nvim dashboard plugin to reload everything on restart!
@@ -636,7 +634,7 @@ require('lazy').setup({
     end
   },
 
-  -- Markdown renderer... nice. 
+  -- Markdown renderer... nice.
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = {
@@ -648,21 +646,21 @@ require('lazy').setup({
     end,
   },
 
-  -- Fancy icons! Gotta have a NerdFont installed for this one to work. 
+  -- Fancy icons! Gotta have a NerdFont installed for this one to work.
   'nvim-tree/nvim-web-devicons',
 
-  -- Buncha different colorschemes I tried out. 
+  -- Buncha different colorschemes I tried out.
   -- I don't think I actually need all these installed though, given telescope has a "colorscheme" builtin,
-  -- and the fzf plugin also provides a ":Colors" command to easily try out / change to other color schemes. 
-  { 'folke/tokyonight.nvim', lazy = true },
-  { 'rose-pine/neovim', lazy = true },
-  { 'rebelot/kanagawa.nvim', lazy = true },
+  -- and the fzf plugin also provides a ":Colors" command to easily try out / change to other color schemes.
+  { 'folke/tokyonight.nvim',         lazy = true },
+  { 'rose-pine/neovim',              lazy = true },
+  { 'rebelot/kanagawa.nvim',         lazy = true },
   { 'scottmckendry/cyberdream.nvim', lazy = true },
-  { 'olimorris/onedarkpro.nvim', lazy = true },
-  { 'catppuccin/nvim', name = 'catppuccin', lazy = 'true' },
-  { 'oxfist/night-owl.nvim', lazy = true },
-  { 'kvrohit/substrata.nvim', lazy = true},
-  { 'Mofiqul/vscode.nvim', lazy = true },
+  { 'olimorris/onedarkpro.nvim',     lazy = true },
+  { 'catppuccin/nvim',               name = 'catppuccin', lazy = 'true' },
+  { 'oxfist/night-owl.nvim',         lazy = true },
+  { 'kvrohit/substrata.nvim',        lazy = true },
+  { 'Mofiqul/vscode.nvim',           lazy = true },
   {
     'bluz71/vim-moonfly-colors',
     name = 'moonfly',
@@ -675,4 +673,3 @@ require('lazy').setup({
   },
 
 })
-

@@ -44,6 +44,16 @@ vim.api.nvim_create_autocmd("LspProgress", {
   end,
 })
 
+-- Auto-format Go files on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    local view = vim.fn.winsaveview()
+    vim.cmd([[%!gofmt]])
+    vim.fn.winrestview(view)
+  end,
+})
+
 ---- Function to ensure exactly one newline at EOF
 --local function clean_trailing_newlines()
 --  local last_non_blank = vim.fn.prevnonblank(vim.fn.line('$')) -- Find the last non-blank line

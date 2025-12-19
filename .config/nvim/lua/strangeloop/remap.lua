@@ -8,11 +8,11 @@ vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>')
 vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>')
 vim.keymap.set('n', '<leader>cs', function()
-  chatFileName = vim.fn.input('Save Chat > ')
+  local chatFileName = vim.fn.input('Save Chat > ')
   if chatFileName ~= '' then vim.cmd.CopilotChatSave(chatFileName) end
 end)
 vim.keymap.set('n', '<leader>cl', function()
-  chatFileName = vim.fn.input('Load Chat > ')
+  local chatFileName = vim.fn.input('Load Chat > ')
   if chatFileName ~= '' then vim.cmd.CopilotChatLoad(chatFileName) end
 end)
 
@@ -53,49 +53,49 @@ vim.keymap.set('n', '<leader>pf', telescope_builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, {})
 -- case sensitive and case-insensitive search options...
 vim.keymap.set('n', '<leader>pS', function()
-	telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
+  telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 vim.keymap.set('n', '<leader>ps', function()
-	telescope_builtin.grep_string({ search = vim.fn.input("Grep > "), additional_args = { "-i" } });
+  telescope_builtin.grep_string({ search = vim.fn.input("Grep > "), additional_args = { "-i" } });
 end)
 
 -- Grep the quickfix list only
 vim.keymap.set('n', '<leader>pq', function()
-    local qf_files = {}
-    for _, item in ipairs(vim.fn.getqflist()) do
-        local bufname = vim.fn.bufname(item.bufnr)
-        if bufname ~= "" then
-            table.insert(qf_files, bufname)
-        end
+  local qf_files = {}
+  for _, item in ipairs(vim.fn.getqflist()) do
+    local bufname = vim.fn.bufname(item.bufnr)
+    if bufname ~= "" then
+      table.insert(qf_files, bufname)
     end
-    
-    if #qf_files == 0 then
-        print("No files in quickfix list")
-        return
-    end
-    
-    telescope_builtin.grep_string({
-        search = vim.fn.input("Grep quickfix > "),
-        search_dirs = qf_files
-    })
+  end
+
+  if #qf_files == 0 then
+    print("No files in quickfix list")
+    return
+  end
+
+  telescope_builtin.grep_string({
+    search = vim.fn.input("Grep quickfix > "),
+    search_dirs = qf_files
+  })
 end)
 
 -- The vimgrep version of '<leader>ps'... stores results in the QuickFix list.
 -- TODO: It's super slow in nodejs projects... is wildignore (set.lua) set wrong?
 vim.keymap.set('n', "<leader>pg", function()
-  grepString = vim.fn.input('Vimgrep > ')
-  if grepString ~= '' then vim.cmd.vimgrep("/"..grepString.."/ ./**") end
+  local grepString = vim.fn.input('Vimgrep > ')
+  if grepString ~= '' then vim.cmd.vimgrep("/" .. grepString .. "/ ./**") end
   vim.cmd.copen()
 end)
 
 -- Shortcuts for working with the QuickFix list
-vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>') -- open qf list
+vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>')   -- open qf list
 vim.keymap.set('n', '<leader>cq', '<cmd>cclose<CR>') -- close qf list
-vim.keymap.set('n', '<leader>rq', function() -- clear qf list
+vim.keymap.set('n', '<leader>rq', function()         -- clear qf list
   vim.fn.setqflist({}, 'f')
 end)
-vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>') -- first qf item
-vim.keymap.set('n', ']Q', '<cmd>clast<CR>') -- last qf item
+vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>')  -- first qf item
+vim.keymap.set('n', ']Q', '<cmd>clast<CR>')   -- last qf item
 vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz') -- next qf item
 vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz') -- previous qf item
 
@@ -103,8 +103,8 @@ vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz') -- previous qf item
 -- instead of the quickfix list
 -- TODO: It's super slow in nodejs projects... is wildignore (set.lua) set wrong?
 vim.keymap.set('n', "<leader>pl", function()
-  grepString = vim.fn.input('LVimgrep > ')
-  if grepString ~= '' then vim.cmd.lvimgrep("/"..grepString.."/ ./**") end
+  local grepString = vim.fn.input('LVimgrep > ')
+  if grepString ~= '' then vim.cmd.lvimgrep("/" .. grepString .. "/ ./**") end
   vim.cmd.lopen()
 end)
 
@@ -122,11 +122,11 @@ end)
 -- vim.keymap.set('n', ']L', '<cmd>lnext<CR>')
 -- vim.keymap.set('n', '[L', '<cmd>lprev<CR>')
 
--- Similar shortcuts but for buffers. 
+-- Similar shortcuts but for buffers.
 vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search
-vim.keymap.set('n', '<leader>b', function() -- a little custom, less fancy buffer switcher
+vim.keymap.set('n', '<leader>b', function()           -- a little custom, less fancy buffer switcher
   vim.cmd.buffers()
-  bufNum = vim.fn.input('buffer: ')
+  local bufNum = vim.fn.input('buffer: ')
   if bufNum ~= '' then vim.cmd.buffer(bufNum) end
 end)
 vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>')
@@ -143,14 +143,14 @@ vim.keymap.set('n', '<M-j>', '<C-w>-5')
 
 -- Navigate to contexts in the barbecue.ui winbar
 vim.keymap.set('n', '<leader>bbq', function()
-  context = vim.fn.input('Context: ')
+  local context = vim.fn.input('Context: ')
   if context ~= '' then require('barbecue.ui').navigate(tonumber(context)) end
 end)
 
 -- Something mysterious is superseding the normal C-^ to jump back to the previously
--- used buffer, and I suffered using C-o for a while and then realized I could just 
--- figure out what the underlying command was and map that to something that does work, 
--- and voila. A new era in file navigation is born. Use this. It's fantastic. 
+-- used buffer, and I suffered using C-o for a while and then realized I could just
+-- figure out what the underlying command was and map that to something that does work,
+-- and voila. A new era in file navigation is born. Use this. It's fantastic.
 vim.keymap.set('n', '<M-6>', ':b#<CR>')
 
 -- This is one of those things that's cooler on paper than in real life. Use these
@@ -159,19 +159,19 @@ vim.keymap.set('n', '<M-6>', ':b#<CR>')
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
--- concatenate the next line to the end of the current one. Nice. 
+-- concatenate the next line to the end of the current one. Nice.
 vim.keymap.set('n', 'J', 'mzJ`z')
 
 -- Makes the cursor stay vertically centered in the screen while doing half-
--- page jumps, moving through search results, or scrolling by paragraph. 
+-- page jumps, moving through search results, or scrolling by paragraph.
 -- Pretty helpful to feel less disoriented by big jumps.
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
--- Paste without automatically putting anything which was pasted over into the paste 
--- register, so that whatever you just pasted is still paste-able again. 
+-- Paste without automatically putting anything which was pasted over into the paste
+-- register, so that whatever you just pasted is still paste-able again.
 vim.keymap.set('x', '<leader>p', '"_dp')
 
 -- Yank into the system paste register instead of vim's paste register. Sweet.
@@ -179,13 +179,13 @@ vim.keymap.set('n', '<leader>y', '"+y')
 vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>Y', '"+Y')
 
--- Do nothing? Cancel anything halfway done? I dunno. Don't use this really. 
+-- Do nothing? Cancel anything halfway done? I dunno. Don't use this really.
 vim.keymap.set('n', 'Q', '<nop>')
 
--- Such a sweet little find and replace for whatever word is under your cursor. 
+-- Such a sweet little find and replace for whatever word is under your cursor.
 vim.keymap.set('n', '<leader>s', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')
 
--- Make the current file executable. 
+-- Make the current file executable.
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
 
 -- Little shortcuts for bringing up the most recent Noice notification popup,
@@ -211,4 +211,3 @@ end, { desc = 'Hide notifier popups' })
 -- `[s` - move to previous bad word
 -- `:spellr` repeats a spelling replacement for all other matches in the buffer
 vim.keymap.set('n', '<leader>zr', ':spellr<CR>')
-
