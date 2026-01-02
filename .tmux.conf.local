@@ -336,7 +336,7 @@ bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection c
 bind -r V select-layout even-vertical
 bind -r E select-layout even-horizontal
 
-bind -r N neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && nvim TODO.md || nvim ~/.dotfiles/personal/todo.md"
+bind -r N neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && /opt/homebrew/bin/nvim TODO.md || /opt/homebrew/bin/nvim ~/.dotfiles/personal/todo.md"
 
 # forget the find window.  That is for chumps
 bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"

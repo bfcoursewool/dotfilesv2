@@ -35,7 +35,7 @@ export LC_ALL="en_US.UTF-8"
 
 # For the perpetuals-api-server project, we use the `tools` feature in go.mod and it needs to be 
 # explicitly enabled for gopls to recognize it as valid!
-export GOEXPERIMENT=tools
+export GOFLAGS="-tags=tools"
 
 # Path setup and initialization of starship, zoxide, etc. 
 export GPG_TTY='tty'

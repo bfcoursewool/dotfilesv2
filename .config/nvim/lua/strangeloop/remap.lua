@@ -16,6 +16,16 @@ vim.keymap.set('n', '<leader>cl', function()
   if chatFileName ~= '' then vim.cmd.CopilotChatLoad(chatFileName) end
 end)
 
+-- Strudel keybindings for slangin' beats inside of vim
+local strudel = require("strudel")
+vim.keymap.set("n", "<leader>sl", strudel.launch, { desc = "Launch Strudel" })
+vim.keymap.set("n", "<leader>sq", strudel.quit, { desc = "Quit Strudel" })
+vim.keymap.set("n", "<leader>st", strudel.toggle, { desc = "Strudel Toggle Play/Stop" })
+vim.keymap.set("n", "<leader>su", strudel.update, { desc = "Strudel Update" })
+vim.keymap.set("n", "<leader>ss", strudel.stop, { desc = "Strudel Stop Playback" })
+vim.keymap.set("n", "<leader>sb", strudel.set_buffer, { desc = "Strudel set current buffer" })
+vim.keymap.set("n", "<leader>sx", strudel.execute, { desc = "Strudel set current buffer and update" })
+
 -- Harpoon keybindings
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
@@ -89,9 +99,9 @@ vim.keymap.set('n', "<leader>pg", function()
 end)
 
 -- Shortcuts for working with the QuickFix list
-vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>')   -- open qf list
-vim.keymap.set('n', '<leader>cq', '<cmd>cclose<CR>') -- close qf list
-vim.keymap.set('n', '<leader>rq', function()         -- clear qf list
+vim.keymap.set('n', '<leader>qq', '<cmd>copen<CR>')  -- open qf list
+vim.keymap.set('n', '<leader>qc', '<cmd>cclose<CR>') -- close qf list
+vim.keymap.set('n', '<leader>qr', function()         -- clear qf list
   vim.fn.setqflist({}, 'f')
 end)
 vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>')  -- first qf item
@@ -183,7 +193,7 @@ vim.keymap.set('n', '<leader>Y', '"+Y')
 vim.keymap.set('n', 'Q', '<nop>')
 
 -- Such a sweet little find and replace for whatever word is under your cursor.
-vim.keymap.set('n', '<leader>s', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')
+vim.keymap.set('n', '<leader>r', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')
 
 -- Make the current file executable.
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })

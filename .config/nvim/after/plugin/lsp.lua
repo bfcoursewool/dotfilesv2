@@ -7,9 +7,9 @@ vim.lsp.config('intelephense', {
 })
 
 lsp_zero.on_attach(function(client, bufnr)
-  lsp_zero.default_keymaps({buffer = bufnr})
+  lsp_zero.default_keymaps({ buffer = bufnr })
 
-  local opts = {buffer = bufnr, remap = false}
+  local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
@@ -25,14 +25,42 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
 end)
 
--- Restore inline diagnostic text
+vim.lsp.config('gopls', {
+  cmd = { 'gopls' },
+  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  root_markers = { 'go.work', 'go.mod', '.git' },
+  capabilities = capabilities,
+  settings = {
+    gopls = {
+      -- Enable experimental workspace module support
+      ["build.experimentalWorkspaceModule"] = true,
+      -- Disable go.mod validation that causes the "unknown block type: tool" error
+      ["ui.diagnostic.staticcheck"] = false,
+      -- Additional settings to help with experimental features
+      buildFlags = {"-tags=tools"},
+    },
+  },
+})
+
+-- Add a global diagnostic handler to filter out the tool block error
+local original_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+  if result and result.diagnostics then
+    result.diagnostics = vim.tbl_filter(function(diagnostic)
+      return not (diagnostic.message and string.match(diagnostic.message, "unknown block type"))
+    end, result.diagnostics)
+  end
+  original_handler(err, result, ctx, config)
+end
+
+-- Configure diagnostic display (only do this once)
 vim.diagnostic.config({
   virtual_text = {
-    spacing = 2,          -- distance to the line
-    prefix  = "●",        -- could be '', '●', '·', or '' for no icon
-    severity = nil,       -- show all severities
+    spacing  = 2,
+    prefix   = "●",
+    severity = nil,
   },
-  signs = true,           -- keep gutter signs
+  signs = true,
   underline = true,
   update_in_insert = false,
 })
