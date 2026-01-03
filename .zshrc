@@ -29,6 +29,16 @@ export SDKROOT=$(xcrun --show-sdk-path)
 
 ##################### User configs ###############################
 
+# Open buffer line in editor (using lightweight nvim profile)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+edit-command-line-with-vi() {
+  NVIM_APPNAME=nvim-light edit-command-line
+}
+zle -N edit-command-line-with-vi
+bindkey '^x^e' edit-command-line-with-vi
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
@@ -40,7 +50,7 @@ export GOFLAGS="-tags=tools"
 # Path setup and initialization of starship, zoxide, etc. 
 export GPG_TTY='tty'
 export PINENTRY_USER_DATA="USE_CURSES=1"
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.local/bin:/usr/local/bin:/Users/robertkotz/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.local/bin:/usr/local/bin:$HOME/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:$PATH"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 autoload -Uz compinit && compinit
