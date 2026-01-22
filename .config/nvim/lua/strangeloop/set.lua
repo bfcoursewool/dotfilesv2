@@ -27,6 +27,16 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
+vim.opt.guicursor = {
+  "n-v-c:block-Cursor/lCursor", -- Normal, visual, command: block
+  "i-ci-ve:ver25",              -- Insert: vertical bar
+  "r-cr:hor20",                 -- Replace: horizontal bar
+}
+vim.cmd([[
+  highlight Cursor guibg=#00ffff
+  highlight lCursor guibg=#00ffff
+]])
+
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append('@-@')

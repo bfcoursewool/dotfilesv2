@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>pS', function()
   telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 vim.keymap.set('n', '<leader>ps', function()
-  telescope_builtin.grep_string({ search = vim.fn.input("Grep > "), additional_args = { "-i" } });
+  telescope_builtin.grep_string({ search = vim.fn.input("Grep (i) > "), additional_args = { "-i" } });
 end)
 
 -- Grep the quickfix list only
@@ -92,47 +92,69 @@ end)
 
 -- The vimgrep version of '<leader>ps'... stores results in the QuickFix list.
 -- TODO: It's super slow in nodejs projects... is wildignore (set.lua) set wrong?
+-- This is a pretty unused keymap for me and more or less only persists here because
+-- it's still a viable option, but it's not high on my actual priority list of ways
+-- to search around a codebase. Just using the standard '<leader>ps' and then adding
+-- select results from that to the quickfix list with ctrl-q is usually fine.
 vim.keymap.set('n', "<leader>pg", function()
   local grepString = vim.fn.input('Vimgrep > ')
   if grepString ~= '' then vim.cmd.vimgrep("/" .. grepString .. "/ ./**") end
   vim.cmd.copen()
 end)
 
--- Shortcuts for working with the QuickFix list
-vim.keymap.set('n', '<leader>qq', '<cmd>copen<CR>')  -- open qf list
-vim.keymap.set('n', '<leader>qc', '<cmd>cclose<CR>') -- close qf list
-vim.keymap.set('n', '<leader>qr', function()         -- clear qf list
-  vim.fn.setqflist({}, 'f')
-end)
-vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>')  -- first qf item
-vim.keymap.set('n', ']Q', '<cmd>clast<CR>')   -- last qf item
-vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz') -- next qf item
-vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz') -- previous qf item
-
 -- lvimgrep shortcut... when you want your vimgrep results to go in the location list
 -- instead of the quickfix list
 -- TODO: It's super slow in nodejs projects... is wildignore (set.lua) set wrong?
+-- Like the vimgrep keymap, this is also only really for retaining the option, and in
+-- practice this is not something I ever really use.
 vim.keymap.set('n', "<leader>pl", function()
   local grepString = vim.fn.input('LVimgrep > ')
   if grepString ~= '' then vim.cmd.lvimgrep("/" .. grepString .. "/ ./**") end
   vim.cmd.lopen()
 end)
 
--- I never use this location list stuff and it's now conflicting with something I want to do with CopilotChat
--- so it gets commented and queued for eventual full deletion...
---
--- -- Keymaps for working with the location list... open, close, next, prev
--- vim.keymap.set('n', '<leader>l', '<cmd>lopen<CR>')
--- vim.keymap.set('n', '<leader>cl', '<cmd>lclose<CR>')
--- -- Now that I have treesitter-textobjects set up, I'm using [l and ]l to navigate forward and
--- -- back in the document from loop to loop. I almost never use the location list anyway, so those
--- -- keymaps are now taking precedence of these, but [L and ]L don't conflict, so I'll just break the
--- -- pattern of the QF list and buffer list navigation that I have here and use ]L and [L for next/prev
--- -- in the location list.
--- vim.keymap.set('n', ']L', '<cmd>lnext<CR>')
--- vim.keymap.set('n', '[L', '<cmd>lprev<CR>')
+-- Shortcuts for working with the QuickFix list
+-- Open, close, clear, save, or load the QF list.
+-- As well as navigate forward and backward, or to the first or last element
+vim.keymap.set('n', '<leader>qq', '<cmd>copen<CR>')  -- open qf list
+vim.keymap.set('n', '<leader>qc', '<cmd>cclose<CR>') -- close qf list
+vim.keymap.set('n', '<leader>qr', function()         -- clear qf list
+  vim.fn.setqflist({}, 'f')
+end)
+vim.keymap.set('n', '<leader>qs', function()
+  local qf_dir = vim.fn.stdpath('config') .. '/qfLists'
+  vim.fn.mkdir(qf_dir, 'p')
+  local filename = vim.fn.input('Save quickfix to: ', qf_dir .. '/quickfix.json')
+  if filename and filename ~= '' then
+    local qflist = vim.fn.getqflist()
+    local json = vim.fn.json_encode(qflist)
+    vim.fn.writefile({ json }, filename)
+    print('Quickfix list saved to ' .. filename)
+  end
+end)
+vim.keymap.set('n', '<leader>ql', function()
+  local qf_dir = vim.fn.stdpath('config') .. '/qfLists'
+  local filename = vim.fn.input('Load quickfix from: ', qf_dir .. '/quickfix.json')
+  if filename and filename ~= '' then
+    local ok, data = pcall(vim.fn.readfile, filename)
+    if ok and #data > 0 then
+      local json = data[1]
+      local qflist = vim.fn.json_decode(json)
+      vim.fn.setqflist(qflist)
+      print('Quickfix list loaded from ' .. filename)
+    else
+      print('Error: Could not read file ' .. filename)
+    end
+  end
+end)
 
--- Similar shortcuts but for buffers.
+vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>')  -- first qf item
+vim.keymap.set('n', ']Q', '<cmd>clast<CR>')   -- last qf item
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz') -- next qf item
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz') -- previous qf item
+
+-- Shortcuts for navigating the buffer list. We can fuzzy-find/search the list, we can move forward and
+-- backward in the list, to the first or last element of the list.
 vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search
 vim.keymap.set('n', '<leader>b', function()           -- a little custom, less fancy buffer switcher
   vim.cmd.buffers()
@@ -221,3 +243,20 @@ end, { desc = 'Hide notifier popups' })
 -- `[s` - move to previous bad word
 -- `:spellr` repeats a spelling replacement for all other matches in the buffer
 vim.keymap.set('n', '<leader>zr', ':spellr<CR>')
+
+-- Function to toggle between IDE and word processor modes
+local function toggle_word_processor_mode()
+  if vim.wo.wrap then
+    -- Switch to IDE mode
+    vim.wo.wrap = false
+    vim.wo.linebreak = false
+    vim.wo.breakindent = false
+  else
+    -- Switch to word processor mode
+    vim.wo.wrap = true        -- Enable line wrapping
+    vim.wo.linebreak = true   -- Wrap at word boundaries (not mid-word)
+    vim.wo.breakindent = true -- Preserve indentation in wrapped lines
+  end
+end
+
+vim.keymap.set('n', '<leader>wp', toggle_word_processor_mode, { desc = 'Toggle word processor mode' })
