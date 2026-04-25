@@ -8,3 +8,7 @@ hardcoded
 vim
 IconCopy
 100
+showErrorNotification
+secrets
+renderTradeType
+SegmentedControl

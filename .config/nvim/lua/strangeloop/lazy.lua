@@ -286,7 +286,7 @@ require('lazy').setup({
   -- to specific locations in a file, sort of consolidating fFtT, /, ?, hjkl, etc.
   -- into a single search interface.
   {
-    'ggandor/leap.nvim',
+    url = 'https://codeberg.org/andyg/leap.nvim',
     config = function()
       local leap = require('leap')
       leap.add_default_mappings()
@@ -642,7 +642,11 @@ require('lazy').setup({
       { 'nvim-treesitter' }
     },
     config = function()
-      require('render-markdown').setup({})
+      require('render-markdown').setup({
+        latex = {
+          enabled = false
+        }
+      })
     end,
   },
 

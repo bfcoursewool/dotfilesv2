@@ -1,5 +1,5 @@
 require("CopilotChat").setup({
-  model = "claude-sonnet-4.5",  -- Specify your desired model here
+  model = "claude-opus-4.6", -- Specify your desired model here
   -- Add other options as needed
   context = 'mcp',
 })
@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 
 -- Clean up old sessions (keep only last 30 days)
 local function cleanup_old_sessions()
-  local session_dir = vim.fn.stdpath("data") .. "/copilotchat/chats"
+  local session_dir = vim.fn.stdpath("data") .. "/copilotchat_history"
   if vim.fn.isdirectory(session_dir) == 1 then
     local files = vim.fn.globpath(session_dir, "session_*.json", false, true)
     local cutoff_time = os.time() - (30 * 24 * 60 * 60) -- 30 days

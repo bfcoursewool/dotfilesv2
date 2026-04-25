@@ -66,7 +66,7 @@ require('lazy').setup({
   -- to specific locations in a file, sort of consolidating fFtT, /, ?, hjkl, etc.
   -- into a single search interface.
   {
-    'ggandor/leap.nvim',
+    url = 'https://codeberg.org/andyg/leap.nvim',
     config = function()
       local leap = require('leap')
       leap.add_default_mappings()

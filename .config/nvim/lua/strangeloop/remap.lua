@@ -38,6 +38,10 @@ vim.keymap.set('n', '<C-j>', function() ui.nav_file(2) end)
 vim.keymap.set('n', '<C-k>', function() ui.nav_file(3) end)
 vim.keymap.set('n', '<C-l>', function() ui.nav_file(4) end)
 
+-- Leap.nvim for jumping to arbitrary locations in buffers
+vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
+
 -- Lazygit via Snacks.nvim is the future of nvim git integration.
 vim.keymap.set("n", "<leader>gs", function() Snacks.lazygit() end)
 vim.keymap.set("n", "<leader>gb", function() Snacks.git.blame_line() end)
@@ -59,8 +63,8 @@ vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open directory view' })
 
 -- fuzzy find all files, just git files, or do a grep! all with telescope.
 local telescope_builtin = require('telescope.builtin');
-vim.keymap.set('n', '<leader>pf', telescope_builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, {})
+vim.keymap.set('n', '<leader>pf', telescope_builtin.find_files, {})
 -- case sensitive and case-insensitive search options...
 vim.keymap.set('n', '<leader>pS', function()
   telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
@@ -155,12 +159,12 @@ vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz') -- previous qf item
 
 -- Shortcuts for navigating the buffer list. We can fuzzy-find/search the list, we can move forward and
 -- backward in the list, to the first or last element of the list.
-vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search
-vim.keymap.set('n', '<leader>b', function()           -- a little custom, less fancy buffer switcher
+vim.keymap.set('n', '<leader>bb', function() -- a little custom, less fancy buffer switcher
   vim.cmd.buffers()
   local bufNum = vim.fn.input('buffer: ')
   if bufNum ~= '' then vim.cmd.buffer(bufNum) end
 end)
+vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search
 vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>')
 vim.keymap.set('n', '[B', '<cmd>bfirst<CR>')
 vim.keymap.set('n', ']B', '<cmd>blast<CR>')
@@ -174,7 +178,7 @@ vim.keymap.set('n', '<M-k>', '<C-w>+5')
 vim.keymap.set('n', '<M-j>', '<C-w>-5')
 
 -- Navigate to contexts in the barbecue.ui winbar
-vim.keymap.set('n', '<leader>bbq', function()
+vim.keymap.set('n', '<leader>bq', function()
   local context = vim.fn.input('Context: ')
   if context ~= '' then require('barbecue.ui').navigate(tonumber(context)) end
 end)
@@ -195,8 +199,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', 'J', 'mzJ`z')
 
 -- Makes the cursor stay vertically centered in the screen while doing half-
--- page jumps, moving through search results, or scrolling by paragraph.
--- Pretty helpful to feel less disoriented by big jumps.
+-- page jumps, moving through search results. Pretty helpful to feel less
+-- disoriented by big jumps.
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -251,11 +255,15 @@ local function toggle_word_processor_mode()
     vim.wo.wrap = false
     vim.wo.linebreak = false
     vim.wo.breakindent = false
+    vim.opt.nu = true
+    vim.opt.relativenumber = true -- don't use relative line numbers in word processor mode
   else
     -- Switch to word processor mode
-    vim.wo.wrap = true        -- Enable line wrapping
-    vim.wo.linebreak = true   -- Wrap at word boundaries (not mid-word)
-    vim.wo.breakindent = true -- Preserve indentation in wrapped lines
+    vim.wo.wrap = true             -- Enable line wrapping
+    vim.wo.linebreak = true        -- Wrap at word boundaries (not mid-word)
+    vim.wo.breakindent = true      -- Preserve indentation in wrapped lines
+    vim.opt.nu = false
+    vim.opt.relativenumber = false -- don't use relative line numbers in word processor mode
   end
 end
 

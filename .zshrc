@@ -20,6 +20,7 @@ plugins=(colored-man-pages colorize history forklift taskwarrior yarn)
 source $ZSH/oh-my-zsh.sh
 
 # MCP Server vars
+# if looking for FIGMA_API_KEY or BRAVE_API_KEY, they're in .dotfiles-secrets to keep them out of my dotfiles repo
 if [ -f ~/.dotfiles-secrets ]; then
   source ~/.dotfiles-secrets
 fi

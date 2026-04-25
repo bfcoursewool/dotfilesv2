@@ -3,7 +3,7 @@ local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 
 require('telescope').load_extension('nerdy')
-require("telescope").setup{
+require("telescope").setup {
   pickers = {
     find_files = {
       hidden = true,
@@ -32,8 +32,9 @@ require("telescope").setup{
 function SearchDotfiles()
   builtin.find_files({
     prompt_title = "🔍 Search Dotfiles",
-    search_dirs = {   -- Set the directory where your dotfiles are located
-      "~/.config", 
+    search_dirs = { -- Set the directory where your dotfiles are located
+      "~/.config",
+      "~/.dotfiles-secrets",
       "~/.local/bin",
       "~/.aws",
       "~/.ssh",
@@ -64,10 +65,9 @@ function SearchDotfiles()
       "~/.taskrc",
       "~/.bash_history",
     },
-    hidden = true,  -- Include hidden files (dotfiles)
+    hidden = true, -- Include hidden files (dotfiles)
   })
 end
 
 -- Create a user command for convenience
 vim.api.nvim_create_user_command('TelescopeDotfiles', SearchDotfiles, {})
-

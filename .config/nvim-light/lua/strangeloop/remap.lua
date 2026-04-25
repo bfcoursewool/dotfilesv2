@@ -7,6 +7,10 @@ vim.g.mapleader = " "
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
+-- Leap.nvim for jumping to arbitrary locations in buffers
+vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
+
 -- concatenate the next line to the end of the current one. Nice.
 vim.keymap.set('n', 'J', 'mzJ`z')
 
