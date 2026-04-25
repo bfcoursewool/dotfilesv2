@@ -30,7 +30,7 @@ export SDKROOT=$(xcrun --show-sdk-path)
 
 ##################### User configs ###############################
 
-# Open buffer line in editor (using lightweight nvim profile)
+# Open buffer line editor (using lightweight nvim profile)
 autoload -Uz edit-command-line
 zle -N edit-command-line
 
@@ -186,10 +186,6 @@ alias dsi='d | grep -i'
 
 # omz somehow misses this one I guess?
 alias 0='cd -0'
-
-# Common typos may as well just do what I want them to.
-# But also don't use this... <C-l> is the way.
-alias cledar="clear"
 
 # eza is ls but with cool icons I guess. nice.
 alias ls="eza --icons=always --git"
