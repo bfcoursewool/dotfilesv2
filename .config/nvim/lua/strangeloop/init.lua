@@ -23,7 +23,7 @@ require('strangeloop.strikethrough')
 require('strangeloop.luasnip')
 require('strangeloop.CopilotChat')
 require('strangeloop.mcphub')
-require('strangeloop.conform')
+--require('strangeloop.conform')
 require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip/"})
 
 local neoscroll = require('neoscroll')
