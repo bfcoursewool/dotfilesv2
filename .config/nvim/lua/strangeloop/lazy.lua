@@ -290,7 +290,7 @@ require('lazy').setup({
     config = function()
       local leap = require('leap')
       leap.add_default_mappings()
-      leap.opts.case_sensitive = true
+      leap.opts.vim_opts['go.ignorecase'] = false
     end
   },
 

@@ -54,6 +54,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- Auto-format Rust files on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.rs",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
 ---- Function to ensure exactly one newline at EOF
 --local function clean_trailing_newlines()
 --  local last_non_blank = vim.fn.prevnonblank(vim.fn.line('$')) -- Find the last non-blank line
@@ -64,6 +72,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 --  -- Delete all lines after the last non-blank line
 --  vim.api.nvim_buf_set_lines(0, last_non_blank, -1, false, { "" })
 --end
+
+---- Function to ensure exactly one newline at EOF
+-- vim.api.nvim_create_autocmd({"BufWritePre"}, {
+--   group = vim.api.nvim_create_augroup('UserOnSave', {}),
+--   pattern = '*',
+--   callback = function()
+--     local n_lines = vim.api.nvim_buf_line_count(0)
+--     local last_nonblank = vim.fn.prevnonblank(n_lines)
+--     if last_nonblank <= n_lines then vim.api.nvim_buf_set_lines(0,
+--       last_nonblank, n_lines, true, { '' })
+--     end
+--   end,
+-- })
 
 ---- Autocommand to trigger on BufWritePre (before saving the file), 
 --vim.api.nvim_create_autocmd("BufWritePre", {

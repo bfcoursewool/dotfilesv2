@@ -2,6 +2,11 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
+[[manager.prepend_keymap]]
+on   = [ "s" ]
+exec = "search fd --hidden"
+desc = "Search files (including hidden)"
+
 [manager]
 ratio          = [ 2, 4, 3 ]
 sort_by        = "mtime"

@@ -380,13 +380,13 @@
                         ]
                     },
                     {
-                        "description": "CMD+Backspace -> delete word, CMD+Delete -> delete line, in Chrome Beta",
+                        "description": "CMD+Backspace -> delete word, CMD+Delete -> delete line, in Chrome",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "com.google.Chrome.beta"
+                                            "com.google.Chrome"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -407,7 +407,7 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "com.google.Chrome.beta"
+                                            "com.google.Chrome"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -427,13 +427,13 @@
                         ]
                     },
                     {
-                        "description": "CMD+[L/R]ArrowKey -> move forward/back one word, in Chrome Beta",
+                        "description": "CMD+[L/R]ArrowKey -> move forward/back one word, in Chrome",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "com.google.Chrome.beta"
+                                            "com.google.Chrome"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -454,7 +454,7 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "com.google.Chrome.beta"
+                                            "com.google.Chrome"
                                         ],
                                         "type": "frontmost_application_if"
                                     }

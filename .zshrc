@@ -30,7 +30,7 @@ export SDKROOT=$(xcrun --show-sdk-path)
 
 ##################### User configs ###############################
 
-# Open buffer line editor (using lightweight nvim profile)
+# Open command line buffer editor (using lightweight nvim profile)
 autoload -Uz edit-command-line
 zle -N edit-command-line
 
@@ -51,7 +51,7 @@ export GOFLAGS="-tags=tools"
 # Path setup and initialization of starship, zoxide, etc. 
 export GPG_TTY='tty'
 export PINENTRY_USER_DATA="USE_CURSES=1"
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.local/bin:/usr/local/bin:/Users/robertkotz/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$HOME/.local/bin:/usr/local/bin:/Users/robertkotz/go/bin:/opt/nvim-macos-arm64/bin:$HOME/.foundry/bin:/opt/homebrew/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 autoload -Uz compinit && compinit
@@ -110,9 +110,9 @@ blue="#06BCE4"
 cyan="#2CF9ED"
 
 ## Use fd instead of find with fzf
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_DEFAULT_COMMAND="/opt/homebrew/bin/fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_ALT_C_COMMAND="/opt/homebrew/bin/fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan} \
                          --bind=ctrl-k:preview-up,ctrl-j:preview-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
 
@@ -140,12 +140,12 @@ _fzf_comprun() {
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
+  /opt/homebrew/bin/fd --hidden --exclude .git . "$1"
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
+  /opt/homebrew/bin/fd --type=d --hidden --exclude .git . "$1"
 }
 
 source ~/.config/fzf/fzf-git.sh/fzf-git.sh
@@ -159,6 +159,9 @@ alias k="kubectl"
 alias kx="kubectx"
 alias kaf="kubectl apply -f "
 alias kdf="kubectl delete -f "
+
+# aliasing fd so it returns same results as the fzf integration always
+alias fd="fd --hidden --strip-cwd-prefix -I --exclude .git"
 
 # vim is the new vi, nvim is the new vim. duh. 
 alias vi="/usr/bin/vim"

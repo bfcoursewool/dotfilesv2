@@ -1,6 +1,10 @@
 -- <leader> is space, cause that makes sense, and also cause Primagen does it.
 vim.g.mapleader = " "
 
+-- Super handy native diff feature in vim
+vim.keymap.set('n', '<leader>dt', ':diffthis<CR>')
+vim.keymap.set('n', '<leader>do', ':diffoff!<CR>')
+
 -- toggle a floating terminal window - super handy!
 vim.keymap.set({ 'n', 't' }, '<leader>tt', '<cmd>Floaterminal<CR>')
 
@@ -118,10 +122,22 @@ vim.keymap.set('n', "<leader>pl", function()
 end)
 
 -- Shortcuts for working with the QuickFix list
--- Open, close, clear, save, or load the QF list.
+-- Toggle open/close, clear, save, or load the QF list.
 -- As well as navigate forward and backward, or to the first or last element
-vim.keymap.set('n', '<leader>qq', '<cmd>copen<CR>')  -- open qf list
-vim.keymap.set('n', '<leader>qc', '<cmd>cclose<CR>') -- close qf list
+vim.keymap.set('n', '<leader>qq', function()
+  local qf_open = false
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      qf_open = true
+      break
+    end
+  end
+  if qf_open then
+    vim.cmd.cclose()
+  else
+    vim.cmd.copen()
+  end
+end)
 vim.keymap.set('n', '<leader>qr', function()         -- clear qf list
   vim.fn.setqflist({}, 'f')
 end)
@@ -166,6 +182,7 @@ vim.keymap.set('n', '<leader>bb', function() -- a little custom, less fancy buff
 end)
 vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search
 vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>')
+vim.keymap.set('n', '<leader>ba', '<cmd>%bdelete<CR>')
 vim.keymap.set('n', '[B', '<cmd>bfirst<CR>')
 vim.keymap.set('n', ']B', '<cmd>blast<CR>')
 vim.keymap.set('n', ']b', '<cmd>bnext<CR>zz')
@@ -220,6 +237,12 @@ vim.keymap.set('n', 'Q', '<nop>')
 
 -- Such a sweet little find and replace for whatever word is under your cursor.
 vim.keymap.set('n', '<leader>r', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')
+vim.keymap.set('v', '<leader>r', function()
+  vim.cmd('noautocmd normal! "hy')
+  local text = vim.fn.escape(vim.fn.getreg('h'), '/\\')
+  local left = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
+  vim.api.nvim_feedkeys(':%s/' .. text .. '/' .. text .. '/gI' .. left, 'n', false)
+end)
 
 -- Make the current file executable.
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })

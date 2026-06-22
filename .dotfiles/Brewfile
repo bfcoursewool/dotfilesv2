@@ -47,7 +47,7 @@ brew "fd"
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Utility to determine file types
 brew "file-formula"
@@ -75,7 +75,7 @@ brew "gnu-tar"
 brew "gnu-which"
 # Library for USB device access
 brew "libusb"
-# GNU Pretty Good Privacy (PGP) package
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # GNU grep, egrep and fgrep
 brew "grep"
@@ -91,7 +91,7 @@ brew "htop"
 brew "httpie"
 # Generic library support script
 brew "libtool"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
@@ -103,6 +103,8 @@ brew "kubernetes-cli"
 brew "kubectx"
 # Template-free customization of Kubernetes YAML manifests
 brew "kustomize"
+# Simple terminal UI for git commands
+brew "lazygit"
 # DNS library written in C
 brew "ldns"
 # Provides library functionality for FIDO U2F & FIDO 2.0, including USB
@@ -115,7 +117,7 @@ brew "lolcat"
 brew "luarocks"
 # Run a Kubernetes cluster locally
 brew "minikube"
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
@@ -125,8 +127,6 @@ brew "ncdu"
 brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Platform built on V8 to build network applications
-brew "node@16"
 # Manage multiple Node.js versions
 brew "nvm"
 # Create, run, and share large language models (LLMs)
@@ -147,6 +147,8 @@ brew "poppler"
 brew "postgresql@14", restart_service: :changed
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
+# Show ps output as a tree
+brew "pstree"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
 # Interpreted, interactive, object-oriented programming language
@@ -175,6 +177,8 @@ brew "teller"
 brew "telnet"
 # Terraform version manager inspired by rbenv
 brew "tfenv"
+# Simplified and community-driven man pages
+brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
@@ -185,6 +189,8 @@ brew "truffle"
 brew "unzip"
 # Collection of Linux utilities
 brew "util-linux"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Display word differences between text files
@@ -205,8 +211,6 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # The best way of working with Protocol Buffers.
 brew "bufbuild/buf/buf"
-# A simple terminal UI for git commands, written in Go
-brew "jesseduffield/lazygit/lazygit"
 # Drop in replacement for ueberzug written in C++
 brew "jstkdng/programs/ueberzugpp"
 # KCL Command Line Interface
@@ -214,10 +218,11 @@ brew "kcl-lang/tap/kcl"
 # High-performance, schema-free, document-oriented database
 brew "mongodb/brew/mongodb-community"
 brew "streamingfast/tap/substreams"
+brew "streamingfast/tap/substreams-sink-sql"
 # Convert images into ascii art
 brew "thezoraiz/ascii-image-converter/ascii-image-converter"
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 # Voice and text chat software
 cask "discord"
 # Collaborative team software
@@ -240,8 +245,12 @@ cask "karabiner-elements"
 cask "mactex-no-gui"
 # Online collaborative whiteboard platform
 cask "miro"
+# Administration and development platform for PostgreSQL
+cask "pgadmin4"
 # Graphical user interface for TeX Live Manager
 cask "tex-live-utility"
+# Open-source BitTorrent client
+cask "transmission"
 # Configurator of compatible keyboards in real time
 cask "vial"
 # Multimedia player
@@ -250,3 +259,7 @@ cask "vlc"
 cask "wezterm"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-vscode-remote.remote-containers"
+go "golang.org/x/tools/gopls"
+go "connectrpc.com/connect/cmd/protoc-gen-connect-go"
+go "github.com/sudorandom/protoc-gen-connect-openapi"
+go "google.golang.org/protobuf/cmd/protoc-gen-go"
