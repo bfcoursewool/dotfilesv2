@@ -568,7 +568,7 @@ require('lazy').setup({
     dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
 
-  -- Fuzzy-finder but for your buffers
+  -- Fuzzy-finder for lots of different things... currently not actually used.
   'junegunn/fzf',
   'junegunn/fzf.vim',
 
