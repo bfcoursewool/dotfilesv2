@@ -180,7 +180,7 @@ vim.keymap.set('n', '<leader>bb', function() -- a little custom, less fancy buff
   local bufNum = vim.fn.input('buffer: ')
   if bufNum ~= '' then vim.cmd.buffer(bufNum) end
 end)
-vim.keymap.set('n', '<leader>bs', '<cmd>Buffers<CR>') -- buffer (fuzzy) search
+vim.keymap.set('n', '<leader>bs', telescope_builtin.buffers, { desc = 'open buffer (fuzzy) search' }) -- buffer (fuzzy) search
 vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>')
 vim.keymap.set('n', '<leader>ba', '<cmd>%bdelete<CR>')
 vim.keymap.set('n', '[B', '<cmd>bfirst<CR>')
