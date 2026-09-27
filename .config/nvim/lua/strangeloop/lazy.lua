@@ -345,9 +345,9 @@ require('lazy').setup({
         -- buftypes for which eyeliner should be disabled
         -- e.g., disabled_buftypes = {"nofile"}
         disabled_buftypes = {},
-        -- add eyeliner to f/F/t/T keymaps;
-        -- see section on advanced configuration for more information
-        default_keymaps = true,
+        -- We define f/F/t/T ourselves in the treesitter config so that the
+        -- moves register with nvim-treesitter's repeatable_move (`;` / `,`).
+        default_keymaps = false,
       }
     end
   },
@@ -470,11 +470,30 @@ require('lazy').setup({
         end
       end
 
-      vim.keymap.set({ "n", "x", "o" }, "'", repeat_and_center(true),
+      vim.keymap.set({ "n", "x", "o" }, ";", repeat_and_center(true),
         { silent = true, desc = "repeat TS move forward + zz" })
-
-      vim.keymap.set({ "n", "x", "o" }, '"', repeat_and_center(false),
+      vim.keymap.set({ "n", "x", "o" }, ",", repeat_and_center(false),
         { silent = true, desc = "repeat TS move backward + zz" })
+
+      -- Replace the builtin f/F/t/T with the repeatable versions so that they
+      -- register themselves as the "last move" for `;` / `,` to repeat. We also
+      -- trigger eyeliner's highlight here since we disabled its default keymaps.
+      local eyeliner = require("eyeliner")
+      local function eyeliner_move(builtin_expr, key)
+        return function()
+          eyeliner.highlight({ forward = (key == "f" or key == "t") })
+          return builtin_expr()
+        end
+      end
+
+      vim.keymap.set({ "n", "x", "o" }, "f",
+        eyeliner_move(ts_repeat_move.builtin_f_expr, "f"), { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "F",
+        eyeliner_move(ts_repeat_move.builtin_F_expr, "F"), { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "t",
+        eyeliner_move(ts_repeat_move.builtin_t_expr, "t"), { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "T",
+        eyeliner_move(ts_repeat_move.builtin_T_expr, "T"), { expr = true })
     end
   },
 
