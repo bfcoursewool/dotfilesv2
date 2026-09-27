@@ -286,7 +286,7 @@ require('lazy').setup({
   -- to specific locations in a file, sort of consolidating fFtT, /, ?, hjkl, etc.
   -- into a single search interface.
   {
-    url = 'https://codeberg.org/andyg/leap.nvim',
+    url = 'https://git.disroot.org/andyg/leap.nvim',
     config = function()
       local leap = require('leap')
       leap.add_default_mappings()
@@ -422,7 +422,7 @@ require('lazy').setup({
 
               -- You can pass a query group to use query from queries/<lang>/<query_group>.scm file in your runtime path.
               -- Below example nvim-treesitter's locals.scm and folds.scm. They also provide highlights.scm and indent.scm.
-              ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+              ["]S"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
               ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
             },
             goto_next_end = {
@@ -588,8 +588,6 @@ require('lazy').setup({
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
       { 'neovim/nvim-lspconfig' },
-      --{'hrsh7th/nvim-cmp'},
-      --{'hrsh7th/cmp-nvim-lsp'},
       { 'L3MON4D3/LuaSnip' },
     }
   },
@@ -611,12 +609,31 @@ require('lazy').setup({
       'graphql',
       'vue',
       'html'
-    }
+    },
+    config = function()
+      vim.g["prettier#autoformat"] = 0
+      vim.g["prettier#autoformat_require_pragma"] = 0
+      vim.g["prettier#exec_cmd_async"] = 0
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*.js", "*.ts", "*.tsx", "*.css", "*.json", "*.lua", "*.yaml", "*.yml", "*.less", "*.scss", "*.graphql", "*.vue", "*.html" },
+        command = "Prettier",
+      })
+    end,
   },
 
   {
     'stevearc/conform.nvim',
-    opts = {}
+    opts = {
+      formatters_by_ft = {
+        python = { "ruff_format", "ruff_organize_imports" },
+      },
+      -- Safe format-on-save: if a formatter errors, conform leaves the buffer untouched
+      format_on_save = {
+        timeout_ms = 3000,
+        lsp_format = "fallback",
+      },
+    },
   },
 
   -- Auto-session will automatically save my sessions, and then

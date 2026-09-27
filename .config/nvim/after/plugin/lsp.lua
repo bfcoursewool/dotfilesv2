@@ -7,7 +7,10 @@ vim.lsp.config('intelephense', {
 })
 
 lsp_zero.on_attach(function(client, bufnr)
-  lsp_zero.default_keymaps({ buffer = bufnr })
+  lsp_zero.default_keymaps({
+    buffer = bufnr,
+    exclude = { 'gi' },
+  })
 
   local opts = { buffer = bufnr, remap = false }
 
@@ -16,7 +19,7 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.cmd('vsplit')
     vim.lsp.buf.definition()
   end, opts)
-  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
+  vim.keymap.set('n', '<leader>gi', function() vim.lsp.buf.implementation() end, opts)
   vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)

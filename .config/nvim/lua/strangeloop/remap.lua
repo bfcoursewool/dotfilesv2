@@ -138,7 +138,7 @@ vim.keymap.set('n', '<leader>qq', function()
     vim.cmd.copen()
   end
 end)
-vim.keymap.set('n', '<leader>qr', function()         -- clear qf list
+vim.keymap.set('n', '<leader>qc', function()         -- clear qf list
   vim.fn.setqflist({}, 'f')
 end)
 vim.keymap.set('n', '<leader>qs', function()

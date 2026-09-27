@@ -94,18 +94,21 @@ alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
+# shifting focus between tiled windows (moves the mouse along with the focus)
 alt-ctrl-h = 'focus left'
 alt-ctrl-j = 'focus down'
 alt-ctrl-k = 'focus up'
 alt-ctrl-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
+# Actually *move* a tile up/down/left/right within a given workspace
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
+# resize tiles
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
 
@@ -134,6 +137,7 @@ ctrl-shift-l = 'workspace L'
 f12 = 'workspace W' # WezTerm
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+# relocate a window to another workspace. 
 cmd-shift-1 = 'move-node-to-workspace 1'
 cmd-shift-2 = 'move-node-to-workspace 2'
 cmd-shift-3 = 'move-node-to-workspace 3'

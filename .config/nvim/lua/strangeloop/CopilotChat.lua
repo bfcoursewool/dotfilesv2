@@ -1,5 +1,5 @@
 require("CopilotChat").setup({
-  model = "claude-opus-4.6", -- Specify your desired model here
+  model = "claude-opus-4.8", -- Specify your desired model here
   -- Add other options as needed
   context = 'mcp',
 })

@@ -33,9 +33,12 @@ function SearchDotfiles()
   builtin.find_files({
     prompt_title = "🔍 Search Dotfiles",
     search_dirs = { -- Set the directory where your dotfiles are located
+      "~/.claude.json",
+      "~/.claude",
       "~/.config",
       "~/.dotfiles-secrets",
       "~/.local/bin",
+      "~/.local/share/nvim",
       "~/.aws",
       "~/.ssh",
       "~/.tmux",
