@@ -279,7 +279,27 @@ require('lazy').setup({
   -- Smooth scrolling for various motions like ctrl-d/ctrl-u and other big vertical jumps
   {
     "karb94/neoscroll.nvim",
-    opts = {},
+    config = function()
+      require("neoscroll").setup({})
+
+      -- Restore native (non-animated) scrolling in markdown buffers so
+      -- image.nvim doesn't thrash redraws during smooth-scroll animations.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "markdown",
+        callback = function()
+          local opts = { buffer = true, silent = true }
+          vim.keymap.set("n", "<C-d>", "<C-d>", opts)
+          vim.keymap.set("n", "<C-u>", "<C-u>", opts)
+          vim.keymap.set("n", "<C-f>", "<C-f>", opts)
+          vim.keymap.set("n", "<C-b>", "<C-b>", opts)
+          vim.keymap.set("n", "<C-e>", "<C-e>", opts)
+          vim.keymap.set("n", "<C-y>", "<C-y>", opts)
+          vim.keymap.set("n", "zt", "zt", opts)
+          vim.keymap.set("n", "zz", "zz", opts)
+          vim.keymap.set("n", "zb", "zb", opts)
+        end,
+      })
+    end,
   },
 
   -- Trying out leap.nvim... just gives a nice consolidated method for leaping
@@ -674,8 +694,8 @@ require('lazy').setup({
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-      { 'nvim-treesitter' }
+      { 'nvim-tree/nvim-web-devicons', opt = true },
+      { 'nvim-treesitter' },
     },
     config = function()
       require('render-markdown').setup({
@@ -684,6 +704,40 @@ require('lazy').setup({
         }
       })
     end,
+  },
+
+  -- Inline image rendering backend (WezTerm = kitty protocol)
+  {
+    '3rd/image.nvim',
+    build = false,
+    opts = {
+      backend = 'kitty',
+      processor = 'magick_cli',
+      integrations = {
+        markdown = { enabled = true },
+      },
+      -- rendered image size
+      tmux_show_only_in_active_window = true, -- hide images when tmux window is inactive
+      max_width = nil,                        -- no column cap
+      max_height = nil,                       -- no row cap
+      max_width_window_percentage = nil,
+      max_height_window_percentage = 100,     -- allow tall images
+    },
+  },
+
+  -- Renders Mermaid (and other) diagrams as images
+  {
+    '3rd/diagram.nvim',
+    dependencies = { '3rd/image.nvim' },
+    opts = {
+      renderer_options = {
+        mermaid = {
+          theme = 'dark',
+          scale = 3,        -- render at 3x resolution for crisper text
+          background = nil, -- or a hex like '#1e1e2e'
+        },
+      },
+    },
   },
 
   -- Fancy icons! Gotta have a NerdFont installed for this one to work.

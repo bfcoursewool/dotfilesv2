@@ -273,6 +273,9 @@ tmux_conf_copy_to_os_clipboard=true
 
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
+set -g allow-passthrough on
+set -g visual-activity off
+set -gq allow-passthrough on
 
 # increase history size
 #set -g history-limit 10000
